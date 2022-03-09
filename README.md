@@ -1,2 +1,2 @@
 # LeasingPlus
-Web application making leasing easier
+Web application making leases easier
