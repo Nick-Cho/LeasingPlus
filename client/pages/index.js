@@ -1,13 +1,12 @@
 
-
 function Home() {
   return (
-    <div className = "container">
-      <div className = "row">
+    <div className = "">
+      {/* <div className = "row">
         <div className = "col">
-          <h1 className = "display-1 text-center">Home Page</h1>
+          <h1 className = " text-center">Home Page</h1>
         </div>
-      </div>
+      </div> */}
       
     </div>
   )
