@@ -5,7 +5,7 @@ function Nav() {
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand text-light">Leasing+</a>
-        
+
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <Link class="nav-item" href="/login">
