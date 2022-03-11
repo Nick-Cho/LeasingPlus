@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-function Nav() {
+function Nav({showLogin,setShowLogin}) {
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <div class="container-fluid">
@@ -8,12 +8,20 @@ function Nav() {
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
-            <Link class="nav-item" href="/login">
-              <a class="nav-link text-light" aria-current="page">Log in</a>
-            </Link>
-            <Link class="nav-item" href="/sign-up">
-              <a class="nav-link text-light" >Sign up</a>
-            </Link>
+            
+            <a 
+            class="nav-item nav-link text-light" 
+            style = {{cursor:"pointer"}} 
+            onClick={()=>{setShowLogin(true)}}>
+              Log in
+            </a>
+            <a 
+            className=" nav-item nav-link text-light" 
+            style = {{cursor:"pointer"}} 
+            onClick={()=>{setShowLogin(true)}}>
+            Sign up
+            </a>
+            
             <Link class="nav-item" href="/features">
               <a class="nav-link text-light" >Features</a>
             </Link>

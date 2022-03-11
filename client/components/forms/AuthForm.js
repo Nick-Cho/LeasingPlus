@@ -1,12 +1,15 @@
 import {useState} from 'react'
 
-function AuthForm() {
+function AuthForm({setShowLogin}) {
   const [rightPanel, setRightPanel] = useState(false)
   return (
     <div className = "body">
       <div className={`login-container bg-dark ${rightPanel? "right-panel-active": ""}`}>
+        <h3 onClick={()=>{setShowLogin(false)}} className = "text-light x" >x</h3>
         <div className="form-container sign-up-container bg-dark">
+          
           <form action="#" className = "bg-dark login-form">
+            
             <h1 className = "login-h1 text-light">Create Account</h1>
             <input type="text" className = "login-input text-light" placeholder="Name" />
             <input type="email" className = "login-input text-light" placeholder="Email" />
@@ -44,8 +47,8 @@ function AuthForm() {
             </div>
           </div>
         </div>
+      </div>
     </div>
-  </div>
   )
 }
 

@@ -2,6 +2,14 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 
 
+.x{
+	cursor: pointer;
+	position: absolute; 
+	right: 0;
+	z-index: 9999;
+	padding-right: 10px;
+	font-weight: bold
+}
 
 .body {
 	display: flex;

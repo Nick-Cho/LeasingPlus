@@ -9,7 +9,9 @@ function MyApp({ Component, pageProps }) {
     <div >
       <Nav showLogin={showLogin} setShowLogin={setShowLogin}/>
       {showLogin &&
-      <Login showLogin={showLogin}/>
+      <div>
+        <Login setShowLogin={setShowLogin}/>
+      </div>
       }
       
       <Component {...pageProps} />
