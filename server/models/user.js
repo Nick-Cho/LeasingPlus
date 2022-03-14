@@ -2,6 +2,18 @@ const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
+const roomSchema = newSchema({
+  key: {type: String},
+  rent: {
+    type: Number,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+});
+
 const userSchema = newSchema({
   name:{
     type: String,
@@ -14,6 +26,7 @@ const userSchema = newSchema({
     required: true,
     unique: true,
   },
+  room:[roomSchema],
   password:{
     type:String,
     required:true,
@@ -24,12 +37,13 @@ const userSchema = newSchema({
     type: Boolean,
     required:true,
   },
-  ... (landlord) && {rentCollected:{
+  ... (!landlord) && {rentCollected:{
     type: Boolean,
   }},
-  ...(landlord) && {rent:{
+  ...(!landlord) && {rent:{
     type: Number,
   }},
 });
 
-export default mongoose.model('User', userSchema);
+const user = mongoose.model('User', userSchema)
+module.exports = user;
