@@ -1,16 +1,16 @@
 import Link from "next/link"
 
-function Nav({showLogin,setShowLogin}) {
+function Nav({setShowLogin}) {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand text-light">Leasing+</a>
+    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <div className="container-fluid">
+        <a className="navbar-brand text-light">Leasing+</a>
 
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
             
             <a 
-            class="nav-item nav-link text-light" 
+            className="nav-item nav-link text-light" 
             style = {{cursor:"pointer"}} 
             onClick={()=>{setShowLogin(true)}}>
               Log in
@@ -22,8 +22,8 @@ function Nav({showLogin,setShowLogin}) {
             Sign up
             </a>
             
-            <Link class="nav-item" href="/features">
-              <a class="nav-link text-light" >Features</a>
+            <Link className="nav-item" href="/features">
+              <a className="nav-link text-light" >Features</a>
             </Link>
             
           </ul>
