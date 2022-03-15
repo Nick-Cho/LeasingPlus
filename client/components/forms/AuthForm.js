@@ -13,7 +13,19 @@ function AuthForm({
 
   const handleSignUp = async(e) => {
     e.preventDefault();
-    const {data} = axios.post(`${NEXT_PUBLIC_API}/login`)
+    try{
+      const {data} = axios.post(`${NEXT_PUBLIC_API}/login`, {
+      name,
+      email,
+      password,
+      secretQuestion,
+      secret,
+    });
+    setRightPanel(false); //setting sign up/in form to sign in section
+  } catch (err){
+    
+  }
+
   }
 
   const handleSignIn = async(e) =>{
