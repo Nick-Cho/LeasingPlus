@@ -26,6 +26,14 @@ const userSchema = newSchema({
     required: true,
     unique: true,
   },
+  secret:{
+    type:String,
+    required:true,
+  },
+  secretQuestion:{
+    type:String,
+    required:true,
+  },
   room:[roomSchema],
   password:{
     type:String,

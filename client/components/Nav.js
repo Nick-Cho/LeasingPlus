@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 function Nav({setShowLogin}) {
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">

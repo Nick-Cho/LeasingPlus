@@ -231,7 +231,7 @@ input::placeholder{
 }
 
 .social-container a {
-	border: 1px solid #DDDDDD;
+	border: 1px solid rgba(204, 204, 204, 0.322);
 	border-radius: 50%;
 	display: inline-flex;
 	justify-content: center;
@@ -242,3 +242,63 @@ input::placeholder{
 }
 
 
+.switch {
+	margin-left: -14rem;
+  position: relative;
+  width: 60px;
+  height: 30px;
+	
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(204, 204, 204, 0.322);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #a8f331;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #a8f331;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
