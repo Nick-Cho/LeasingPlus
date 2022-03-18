@@ -9,8 +9,8 @@ export async function register(req,res){
     return res.status(400).send({message: "Must Enter a password with 6 or more characters"});
   }
   if (!secret) return res.status(400).send({message: "Answer to question required for account recovery"});
-  // const exist = await User.findOne({"email": email});
-  // if (exist) return res.status(400).send({message: "Email already registered"});
+  const exist = await Account.findOne({"email": email});
+  if (exist) return res.status(400).send({message: "Email already registered"});
 
   const hashedPassword = await hashPassword(password);
   const account = new Account({
@@ -21,11 +21,12 @@ export async function register(req,res){
     secret: secret,
   });
   try{ 
-    account.save()
-    return res.json({
-      ok: true
+    account.save();
+    return res.status(400).json({
+      ok: true,
     })
-  } catch(err){
+  } 
+  catch(err){
     console.log("Register endpoint error: ", err);
     return res.status(400).send({message:"Error in register endpoint"})
   }
