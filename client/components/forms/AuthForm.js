@@ -4,7 +4,7 @@ function AuthForm({
   setShowLogin
 }) 
 {
-  const [rightPanel, setRightPanel] = useState(false)
+  const [rightPanel, setRightPanel] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +21,7 @@ function AuthForm({
       secretQuestion,
       secret,
     });
-    setRightPanel(false); //setting sign up/in form to sign in section
+    setRightPanel(false); //setting authform form to sign in section after signing up
   } catch (err){
     
   }
@@ -75,8 +75,8 @@ function AuthForm({
               <button className="ghost login-button" id="signIn" onClick={()=>{setRightPanel(!rightPanel)}}>Sign In</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className = "login-h1">Hello, Friend!</h1>
-              <p>Enter your personal details and start journey with us</p>
+              <h1 className = "login-h1">New to Leasing+?</h1>
+              <p>Enter your details and make leasing easier</p>
               <button className="ghost login-button" id="signUp"  onClick={()=>{setRightPanel(!rightPanel)}}>Sign Up</button>
             </div>
           </div>
