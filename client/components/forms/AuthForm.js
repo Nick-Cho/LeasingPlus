@@ -1,5 +1,5 @@
 import {useState} from 'react'
-
+import axios from 'axios';
 function AuthForm({
   setShowLogin
 }) 
@@ -14,16 +14,17 @@ function AuthForm({
   const handleSignUp = async(e) => {
     e.preventDefault();
     try{
-      const {data} = axios.post(`${NEXT_PUBLIC_API}/login`, {
+      const {data} = axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
       name,
       email,
       password,
       secretQuestion,
       secret,
     });
+    console.log("Return from register endpoint: ", data)
     setRightPanel(false); //setting authform form to sign in section after signing up
   } catch (err){
-    
+    console.log(err);
   }
 
   }

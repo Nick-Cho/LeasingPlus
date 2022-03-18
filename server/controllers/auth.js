@@ -1,17 +1,19 @@
-import user from "../../../social-network-app/server/models/user";
+import Account from "../models/user";
 import {hashPassword} from '../helpers/auth'
 
 export async function register(req,res){
   const {name, email, password, secretQuestion, secret } = req.body;
-  if (!name) return res.status(400).send({message: "Name is required"})
+  //Registration validation
+  if (!name) return res.status(400).send({message: "Name is required"});
   if (!password || password.length < 6){
-    return res.status(400).send({message: "Must Enter a password with 6 or more characters"})
+    return res.status(400).send({message: "Must Enter a password with 6 or more characters"});
   }
-  if (!secret) return res.status(400).send({message: "Answer to question required for account recovery"})
-  const exist = await user.findOne({"email": email})
-  if (exist) return res.status(400).send({message: "Email already registered"})
+  if (!secret) return res.status(400).send({message: "Answer to question required for account recovery"});
+  // const exist = await User.findOne({"email": email});
+  // if (exist) return res.status(400).send({message: "Email already registered"});
+
   const hashedPassword = await hashPassword(password);
-  const user = new user({
+  const account = new Account({
     name: name,
     email: email,
     password: hashedPassword,
@@ -19,7 +21,7 @@ export async function register(req,res){
     secret: secret,
   });
   try{ 
-    user.save()
+    account.save()
     return res.json({
       ok: true
     })

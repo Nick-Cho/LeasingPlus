@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
-const roomSchema = newSchema({
+const roomSchema = new Schema({
   key: {type: String},
   rent: {
     type: Number,
@@ -14,7 +14,7 @@ const roomSchema = newSchema({
   },
 });
 
-const userSchema = newSchema({
+const accountSchema = new Schema({
   name:{
     type: String,
     trim: true,
@@ -34,7 +34,7 @@ const userSchema = newSchema({
     type:String,
     required:true,
   },
-  room:[roomSchema],
+  // room:[roomSchema],
   password:{
     type:String,
     required:true,
@@ -43,15 +43,15 @@ const userSchema = newSchema({
   },
   landlord:{
     type: Boolean,
-    required:true,
+    // required:true,
   },
-  ... (!landlord) && {rentCollected:{
-    type: Boolean,
-  }},
-  ...(!landlord) && {rent:{
-    type: Number,
-  }},
+  // ... (!landlord) && {rentCollected:{
+  //   type: Boolean,
+  // }},
+  // ...(!landlord) && {rent:{
+  //   type: Number,
+  // }},
 });
 
-const user = mongoose.model('User', userSchema)
-module.exports = user;
+const account = mongoose.model('Account', accountSchema)
+module.exports = account;
