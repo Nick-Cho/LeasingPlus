@@ -4,14 +4,18 @@ import {hashPassword} from '../helpers/auth'
 export async function register(req,res){
   const {name, email, password, secretQuestion, secret } = req.body;
   //Registration validation
-  if (!name) return res.status(400).send({message: "Name is required"});
+  if (!name) return res.send({success: false, message: "Name is required"});
+  // console.log("Passed name check")
   if (!password || password.length < 6){
-    return res.status(400).send({message: "Must Enter a password with 6 or more characters"});
+    return res.send({success: false, message: "Must Enter a password with 6 or more characters"});
   }
-  if (!secret) return res.status(400).send({message: "Answer to question required for account recovery"});
+  // console.log("Passed password check")
+  if (!secret) return res.send({success: false, message: "Answer to question required for account recovery"});
+  // console.log("Passed secret check")
   const exist = await Account.findOne({"email": email});
-  if (exist) return res.status(400).send({message: "Email already registered"});
-
+  // console.log("Exist variable output: ", exist)
+  if (exist.email === email) return res.json({success: false, message: "Email already registered"});
+  // console.log("Passed duplicate error check")
   const hashedPassword = await hashPassword(password);
   const account = new Account({
     name: name,
@@ -22,7 +26,7 @@ export async function register(req,res){
   });
   try{ 
     account.save();
-    return res.status(400).json({
+    return res.status(200).send({
       ok: true,
     })
   } 
@@ -32,10 +36,10 @@ export async function register(req,res){
   }
 }
 
-// export async function login(req,res){
-//   try{
+export async function login(req,res){
+  try{
 
-//   } catch (err){
-
-//   }
-// }
+  } catch (err){
+    console.log("Error in login endpoint ", err);
+  }
+}

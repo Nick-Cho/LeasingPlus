@@ -11,27 +11,34 @@ function AuthForm({
   const [secret, setSecret] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
 
-  const handleSignUp = async(e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    try{
-      const data = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
+    
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
       name,
       email,
       password,
       secretQuestion,
       secret,
-    });
-    console.log("Return from register endpoint: ", data)
-    setRightPanel(false); //setting authform form to sign in section after signing up
-  } catch (err){
-    console.log(err);
-  }
-
+    })
+    console.log("Return from register endpoint: ", response.data);
+    if (response.data.success == true){
+      setRightPanel(false); //setting authform form to sign in section after signing up
+      setPassword("");
+      setName("");
+      setEmail("");
+      setSecret("");
+    }
+    else{
+      console.log(response.data.message);
+    }
+    
   }
 
   const handleSignIn = async(e) =>{
     e.preventDefault();
   }
+
   return (
     <div className = "body">
       <div className={`login-container bg-dark ${rightPanel? "right-panel-active": ""}`}>
