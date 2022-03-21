@@ -40,6 +40,16 @@ function AuthForm({
 
   const handleSignIn = async(e) =>{
     e.preventDefault();
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, {
+      email,
+      password,
+    })
+    if (response.data.success == true){
+      setShowLogin(false);
+    }
+    else{
+      toast.error(response.data.message);
+    }
   }
 
   return (
@@ -75,7 +85,7 @@ function AuthForm({
             <input type="email" className = "login-input text-light" placeholder="Email"  value = {email} onChange={(e)=>{setEmail(e.target.value)}}/>
             <input type="password" className = "login-input text-light" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
             <a href="#" className = "nav-link">Forgot your password?</a>
-            <button className = "login-button" >Sign In</button>
+            <button disabled={(email=="") || (password =="")} className = "login-button" >Sign In</button>
           </form>
         </div>
         <div className="overlay-container">

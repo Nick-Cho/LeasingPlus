@@ -1,6 +1,6 @@
 import Account from "../models/user";
-import {hashPassword} from '../helpers/auth'
-
+import {hashPassword, comparePassword} from '../helpers/auth'
+import jwt from "jsonwebtoken"
 export async function register(req,res){
   const {name, email, password, secretQuestion, secret } = req.body;
   //Registration validation
@@ -16,7 +16,7 @@ export async function register(req,res){
   // console.log("Passed secret check")
   const exist = await Account.findOne({"email": email});
   // console.log("Exist variable output: ", exist)
-  if (exist.email === email) return res.json({success: false, message: "Email already registered"});
+  if (exist.email === email) return res.send({success: false, message: "Email already registered"});
   // console.log("Passed duplicate error check")
   const hashedPassword = await hashPassword(password);
   const account = new Account({
@@ -40,8 +40,23 @@ export async function register(req,res){
 
 export async function login(req,res){
   try{
-    
+    const {email,password} = req.body;
+    //finding user with same email
+    const user = await Account.findOne({"email": email});
+    if (!user) return res.send({success: false, message: "User not found"});
+    console.log(password, user);
+    //checking password
+    const match = await comparePassword(password, user.password);
+    if (!match) return res.send({success: false, message: "Password is incorrect"});
+
+    const token = jwt.sign({_id: user._id}, process.env.JWT_SECRET,{
+      expiresIn: "7d",
+    })
+
+    res.send({success:true, token, user});
+
   } catch (err){
     console.log("Error in login endpoint ", err);
+    res.send({success: false, message: "Error in login endpoint"});
   }
 }
