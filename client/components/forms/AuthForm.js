@@ -45,6 +45,7 @@ function AuthForm({
       password,
     })
     if (response.data.success == true){
+      toast.success(response.data.message);
       setShowLogin(false);
     }
     else{

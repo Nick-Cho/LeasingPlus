@@ -53,7 +53,7 @@ export async function login(req,res){
       expiresIn: "7d",
     })
 
-    res.send({success:true, token, user});
+    res.send({success:true, message: "Login Success", token, user});
 
   } catch (err){
     console.log("Error in login endpoint ", err);
