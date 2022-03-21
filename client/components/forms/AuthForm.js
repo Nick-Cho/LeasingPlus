@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios';
+import {toast} from "react-toastify";
 function AuthForm({
   setShowLogin
 }) 
@@ -12,6 +13,7 @@ function AuthForm({
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
 
   const handleSignUp = async (e) => {
+    
     e.preventDefault();
     
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
@@ -21,8 +23,9 @@ function AuthForm({
       secretQuestion,
       secret,
     })
-    console.log("Return from register endpoint: ", response.data);
+    // console.log("Return from register endpoint: ", response.data);
     if (response.data.success == true){
+      toast.success('Succesfully Registered!')
       setRightPanel(false); //setting authform form to sign in section after signing up
       setPassword("");
       setName("");
@@ -30,7 +33,7 @@ function AuthForm({
       setSecret("");
     }
     else{
-      console.log(response.data.message);
+      toast.error(response.data.message);
     }
     
   }

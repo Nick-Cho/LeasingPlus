@@ -6,9 +6,11 @@ export async function register(req,res){
   //Registration validation
   if (!name) return res.send({success: false, message: "Name is required"});
   // console.log("Passed name check")
+  if (!email) return res.send({success: false, message: "Email is required"})
   if (!password || password.length < 6){
     return res.send({success: false, message: "Must Enter a password with 6 or more characters"});
   }
+  
   // console.log("Passed password check")
   if (!secret) return res.send({success: false, message: "Answer to question required for account recovery"});
   // console.log("Passed secret check")
@@ -38,7 +40,7 @@ export async function register(req,res){
 
 export async function login(req,res){
   try{
-
+    
   } catch (err){
     console.log("Error in login endpoint ", err);
   }
