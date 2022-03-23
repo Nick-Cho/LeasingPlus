@@ -2,14 +2,15 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import {useState} from "react"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-  
+import {UserProvider} from "../context/index.js";
+
 import Nav from '../components/Nav'
 import Login from '../components/forms/AuthForm'
 import '../public/styles/styles.css'
 function MyApp({ Component, pageProps }) {
   const [showLogin, setShowLogin] = useState(false)
   return( 
-    <div >
+    <UserProvider >
       <div style ={{filter: showLogin ? "blur(4px)" : ""}}>
         <Nav setShowLogin={setShowLogin}/>
       </div>
@@ -24,7 +25,7 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </div>
       
-    </div>
+    </UserProvider>
   )
 }
 

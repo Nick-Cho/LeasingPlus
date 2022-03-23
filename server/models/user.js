@@ -45,12 +45,12 @@ const accountSchema = new Schema({
     type: Boolean,
     // required:true,
   },
-  // ... (!landlord) && {rentCollected:{
-  //   type: Boolean,
-  // }},
-  // ...(!landlord) && {rent:{
-  //   type: Number,
-  // }},
+  rentCollected:{
+     type: Boolean,
+  },
+  rent:{
+    type: Number,
+  },
 });
 
 const account = mongoose.model('Account', accountSchema)

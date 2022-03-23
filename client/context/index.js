@@ -11,11 +11,11 @@ const UserProvider = ({children}) => {
   });
 
   //attempting to get authentication key from local storage on startup
-  useEffect(() => {
-    setState(JSON.parse(window.localStorage.getItem('auth')));
-  }, []);
+  // useEffect(() => {
+  //   setState(JSON.parse(window.localStorage.getItem('auth')));
+  // }, []);
 
-  const router = useRouter();
+  // const router = useRouter();
  
   const token = state && state.token ? state.token : " ";
 
