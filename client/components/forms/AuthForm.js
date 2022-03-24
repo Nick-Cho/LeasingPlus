@@ -1,10 +1,9 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import axios from 'axios';
 import {toast} from "react-toastify";
-function AuthForm({
-  setShowLogin
-}) 
-{
+import {UserContext} from '../../context/index'
+function AuthForm({setShowLogin}) {
+  const [state, setState] = useContext(UserContext);
   const [rightPanel, setRightPanel] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,9 +12,7 @@ function AuthForm({
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
 
   const handleSignUp = async (e) => {
-    
     e.preventDefault();
-    
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
       name,
       email,
@@ -46,6 +43,12 @@ function AuthForm({
     })
     if (response.data.success == true){
       toast.success(response.data.message);
+      setState({
+        user: response.data.user,
+        token: response.data.token,
+      })
+      console.log("State after calling login endpoint: ", state);
+      window.localStorage.setItem('auth', JSON.stringify(state));
       setShowLogin(false);
     }
     else{

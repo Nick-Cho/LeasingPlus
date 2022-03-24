@@ -44,7 +44,7 @@ export async function login(req,res){
     //finding user with same email
     const user = await Account.findOne({"email": email});
     if (!user) return res.send({success: false, message: "User not found"});
-    console.log(password, user);
+    // console.log(password, user);
     //checking password
     const match = await comparePassword(password, user.password);
     if (!match) return res.send({success: false, message: "Password is incorrect"});

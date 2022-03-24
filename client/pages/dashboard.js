@@ -3,8 +3,8 @@ import {UserContext} from "../context/index.js";
 import {wallpaper} from "../public/images/wallpaper.jpg"
 export default function Dashboard() {
   const [state,setState] = useContext(UserContext);
-  useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick", "landlord": false}, token: "test"})}
-  ,[])
+  // useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick", "landlord": false}, token: "test"})}
+  // ,[])
   return (
     <div style = {{backgroundColor: "black", overflow: "hidden", height: "auto"}} className ="min-vh-100 container-fluid">
       <div className = "row">

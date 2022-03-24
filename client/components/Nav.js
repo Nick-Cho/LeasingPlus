@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { useRouter } from "next/router";
-import {useState, useContext, useEffect} from "react";
+import {useContext, useEffect} from "react";
 import {UserContext} from "../context/index"
 function Nav({setShowLogin}) {
   const [state, setState] = useContext(UserContext);
@@ -13,8 +13,8 @@ function Nav({setShowLogin}) {
     router.push("/");
   }
   //For Testing
-  useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick"}, token: "test"})}
-  ,[])
+  // useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick"}, token: "test"})}
+  // ,[])
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">

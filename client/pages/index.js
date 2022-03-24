@@ -1,10 +1,10 @@
 
 function Home() {
   return (
-    <div className = "container">
+    <div className = "container-fluid min-vh-100" style = {{backgroundColor: "black"}}>
       <div className = "row">
         <div className = "col">
-          <h1 className = " text-center">Home Page</h1>
+          <h1 className = " text-center text-light">Home Page</h1>
         </div>
       </div>
       
