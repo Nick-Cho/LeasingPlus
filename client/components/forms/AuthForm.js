@@ -48,10 +48,10 @@ function AuthForm({setShowLogin}) {
         user: response.data.user,
         token: response.data.token,
       })
-      console.log("State after calling login endpoint: ", state);
+      console.log("State after calling login endpoint (from Authform component): ", state);
       window.localStorage.setItem('auth', JSON.stringify(state));
       setShowLogin(false);
-      router.push("/dashboard")
+      router.push("/user/dashboard")
     }
     else{
       toast.error(response.data.message);
@@ -90,7 +90,7 @@ function AuthForm({setShowLogin}) {
             <h1 className = "login-h1 text-light">Sign in</h1>
             <input type="email" className = "login-input text-light" placeholder="Email"  value = {email} onChange={(e)=>{setEmail(e.target.value)}}/>
             <input type="password" className = "login-input text-light" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-            <a href="#" className = "nav-link">Forgot your password?</a>
+            <a href="/forgot-password" className = "nav-link">Forgot your password?</a>
             <button disabled={(email=="") || (password =="")} className = "login-button" >Sign In</button>
           </form>
         </div>

@@ -18,9 +18,6 @@ function Nav({setShowLogin}) {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-      {
-      console.log("state user: ", state.user)
-      } 
       <div className="container-fluid">
         <a className="navbar-brand text-light" href = "/">Leasing+</a>
 
@@ -51,7 +48,7 @@ function Nav({setShowLogin}) {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className = "nav-item">
-                <Link className = "nav-item" href ="/dashboard">
+                <Link className = "nav-item" href ="/user/dashboard">
                   <a className = "nav-link text-light">Dashboard</a>
                 </Link>
               </li>
