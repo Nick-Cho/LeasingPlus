@@ -2,6 +2,7 @@ import {useState, useContext} from 'react'
 import axios from 'axios';
 import {toast} from "react-toastify";
 import {UserContext} from '../../context/index'
+import { useRouter } from 'next/router';
 function AuthForm({setShowLogin}) {
   const [state, setState] = useContext(UserContext);
   const [rightPanel, setRightPanel] = useState(false);
@@ -10,7 +11,7 @@ function AuthForm({setShowLogin}) {
   const [password, setPassword] = useState("");
   const [secret, setSecret] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
-
+  const router = useRouter();
   const handleSignUp = async (e) => {
     e.preventDefault();
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
@@ -50,6 +51,7 @@ function AuthForm({setShowLogin}) {
       console.log("State after calling login endpoint: ", state);
       window.localStorage.setItem('auth', JSON.stringify(state));
       setShowLogin(false);
+      router.push("/dashboard")
     }
     else{
       toast.error(response.data.message);
@@ -68,10 +70,10 @@ function AuthForm({setShowLogin}) {
             <input type="text" className = "login-input text-light" placeholder="Name" value = {name} onChange={(e)=>{setName(e.target.value)}}/>
             <input type="email" className = "login-input text-light" placeholder="Email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
             <input type="password" className = "login-input text-light" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>     
-            <label class="switch">
+            {/* <label class="switch">
               <input type="checkbox"/>
               <span className="slider round"></span>
-            </label>
+            </label> */}
             <select value = {secretQuestion} className = "form-control text-light bg-dark" style = {{borderColor:"gray", marginTop: "5px"}} onChange={(e)=>{setSecretQuestion(e.target.value)}}>
               <option >What is your favourite color?</option>
               <option >What is your first friend's name?</option>
@@ -83,7 +85,7 @@ function AuthForm({setShowLogin}) {
             <button className = "login-button" style = {{marginTop: "5px"}} >Sign Up</button>
           </form>
         </div>
-        <div className="form-container sign-in-container">
+        <div className="form-container bg-dark sign-in-container">
           <form action="#" className = "bg-dark login-form" onSubmit = {handleSignIn}>
             <h1 className = "login-h1 text-light">Sign in</h1>
             <input type="email" className = "login-input text-light" placeholder="Email"  value = {email} onChange={(e)=>{setEmail(e.target.value)}}/>

@@ -48,8 +48,12 @@ const accountSchema = new Schema({
   rentCollected:{
      type: Boolean,
   },
+  rentPaid:{
+    type: Boolean,
+  },
   rent:{
     type: Number,
+    trim: true,
   },
 });
 
