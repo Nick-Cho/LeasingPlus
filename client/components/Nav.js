@@ -17,7 +17,7 @@ function Nav({setShowLogin}) {
   // ,[])
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav style= {{position: "absolute"}} className="container-fluid navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand text-light" href = "/">Leasing+</a>
 
