@@ -14,11 +14,11 @@ export default function ForgotPasswordForm({
 {
   const [showPswd, setShowPswd] = useState(false);
   const [confirmPswd, setConfirmPswd] = useState("");
-  useEffect(()=>{
-    console.log("new password on reload: ", newPassword);
-
-    console.log("confirm password on reload: ", confirmPswd);
-  },[newPassword])
+  
+  // useEffect(()=>{
+  //   console.log(newPassword, email, secret, confirmPswd)
+  // },[newPassword])
+  
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -29,8 +29,8 @@ export default function ForgotPasswordForm({
         </div> 
         
         <div class="form-group p-2">
-          <label className="text-muted form-text" onChange={(e)=>{setEmail(e.target.value)}}>Email address</label>
-          <input type="email" className="form-control bg-dark text-light font" placeholder="Enter email"/>
+          <label className="text-muted form-text" >Email address</label>
+          <input type="email" className="form-control bg-dark text-light font" placeholder="Enter email" onChange={(e)=>{setEmail(e.target.value)}}/>
           <small class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group px-2">

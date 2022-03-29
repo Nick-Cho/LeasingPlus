@@ -38,7 +38,7 @@ function AuthForm({setShowLogin}) {
 
   const handleSignIn = async(e) =>{
     e.preventDefault();
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/login`, {
+    const response = await axios.post(`/login`, {
       email,
       password,
     })

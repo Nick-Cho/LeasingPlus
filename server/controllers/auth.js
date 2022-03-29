@@ -65,9 +65,12 @@ export async function login(req,res){
 export async function forgotPassword(req,res){
   try{
     const {email, newPassword, secretQuestion, secret} = req.body;
+    console.log(secretQuestion, secret)
     //Checking if user with the email provided exists
     const user = await Account.findOne({"email": email});
     if (!user) return res.send({success: false, message: "Email not registered"});
+    
+    if (newPassword == user.password){ return res.send({success: false, message: "Don't use a previous password"})}
     //checking if user's password recovery matches up with registered user's data
     if ((user.secret != secret) || (user.secretQuestion != secretQuestion)){
       return res.send({success: false, message: "Password recovery question answered incorrectly"})
