@@ -11,6 +11,10 @@
 	font-weight: bold
 }
 
+.font{
+	font-family: "Montserrat", sans-serif;
+}
+
 .body {
 	position: absolute;
 	display: flex;
