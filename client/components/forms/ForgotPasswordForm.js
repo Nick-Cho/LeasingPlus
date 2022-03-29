@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 
 export default function ForgotPasswordForm({
   handleSubmit,
@@ -10,12 +10,18 @@ export default function ForgotPasswordForm({
   setSecret,
   secretQuestion,
   setSecretQuestion
-}) {
+})
+{
   const [showPswd, setShowPswd] = useState(false);
   const [confirmPswd, setConfirmPswd] = useState("");
+  useEffect(()=>{
+    console.log("new password on reload: ", newPassword);
+
+    console.log("confirm password on reload: ", confirmPswd);
+  },[newPassword])
   return (
     <>
-      <form onSubmit={handleSubmit} style={{backgroundColor: "rgb(25,25,25)"}}>
+      <form onSubmit={handleSubmit}>
         <div className="row" >
           <div className="col text-center" >
             <h1 className= "text-light font"> Forgot Password</h1>
@@ -37,14 +43,16 @@ export default function ForgotPasswordForm({
         <div class="form-group px-2">
           <input type="checkbox" class="form-check-input font" onClick ={()=>{setShowPswd(!showPswd)}}/>
           <label class="form-check-label text-light px-2" >Show Password</label>
-          {(confirmPswd === newPassword) ? 
-            <>
-              <p className="text-success font"> Passwords match </p>
-            </>
-            :
-            <>
-              <p className="text-danger font"> Passwords don't match </p>
-            </>
+          {
+           (confirmPswd != "") && 
+              (confirmPswd === newPassword) ? 
+              <>
+                <p className="text-success font"> Passwords match </p>
+              </>
+              :
+              <>
+                <p className="text-danger font"> Passwords don't match </p>
+              </>           
           }
         </div>
 
