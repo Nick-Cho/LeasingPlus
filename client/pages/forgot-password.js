@@ -2,6 +2,7 @@ import {UserContext} from '../context/index.js';
 import {useContext,useState} from "react";
 import {useRouter} from "next/router";
 import ForgotPasswordForm from '../components/forms/ForgotPasswordForm.js';
+import axios from 'axios';
 function ForgotPassword() {
   const [state,setState] = useContext(UserContext);
   const [email,setEmail] = useState("");
@@ -9,7 +10,9 @@ function ForgotPassword() {
   const [secret, setSecret] = useState("")
   const [secretQuestion, setSecretQuestion] = useState("")
   const handleSubmit = async(e) => {
-    console.log("handle submit")
+    const data = await axios.put(`${process.env.NEXT_PUBLIC_API}/forgot-password`,{
+      email, newPassword, secretQuestion, secret
+    })
   } 
   return (
     <div className = "container-fluid" style = {{minHeight: "100vh",backgroundColor: "black",paddingTop: "4rem" }}>

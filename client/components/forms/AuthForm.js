@@ -82,7 +82,7 @@ function AuthForm({setShowLogin}) {
             <small className = "text-muted form-text" style = {{fontSize: "12px"}}> Pick a question to use for password recovery</small>
             <input type="secret" className = "login-input text-light" value = {secret} onChange={(e)=>{setSecret(e.target.value)}} placeholder="Enter your answer" />
             
-            <button className = "login-button" style = {{marginTop: "5px"}} >Sign Up</button>
+            <button disabled={(email == "") || (password == "") || (secret == "") || (name == "")} className = "login-button" style = {{marginTop: "5px"}} >Sign Up</button>
           </form>
         </div>
         <div className="form-container bg-dark sign-in-container">

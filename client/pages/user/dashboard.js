@@ -24,9 +24,9 @@ export default function Dashboard() {
     }
   }, [state.user.rentPaid || state.user.rentCollected])
   return (
-    <div style = {{backgroundColor: "black", height: "auto",  minHeight: "92.7vh"}} className ="container-fluid">
+    <div style = {{backgroundColor: "black",height: "auto", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
-        <div className = "col-md-4">
+        <div className = "mt-4 col-md-4 pb-4" style = {{backgroundColor: "rgb(30,30,30)"}}>
           <div style = {{display: "inline"}}>
             <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" style={{display: "inline"}}/>
             <h1 style={{display: "inline"}} className = "display-3 text-light text-center">{state.user.name}</h1>

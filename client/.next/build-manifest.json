@@ -34,6 +34,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/forgot-password.js"
+    ],
+    "/user/dashboard": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/user/dashboard.js"
     ]
   },
   "ampFirstPages": []

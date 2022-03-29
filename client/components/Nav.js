@@ -13,15 +13,15 @@ function Nav({setShowLogin}) {
     router.push("/");
   }
   //For Testing
-  // useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick"}, token: "test"})}
-  // ,[])
+  useEffect(()=>{console.log(state.user)}
+  ,[])
 
   return (
     <nav style= {{position: "absolute"}} className="container-fluid navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand text-light" href = "/">Leasing+</a>
 
-        {(JSON.stringify(state.user) === "{}") && 
+        {(!state || JSON.stringify(state.user) === "{}") && 
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul className="navbar-nav">
             <a 
@@ -44,7 +44,7 @@ function Nav({setShowLogin}) {
         </div>}
 
 
-        {(JSON.stringify(state.user) !== "{}" ) &&
+        {(state && JSON.stringify(state.user) !== "{}" ) &&
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className = "nav-item">

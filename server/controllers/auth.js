@@ -1,6 +1,7 @@
 import Account from "../models/user";
 import {hashPassword, comparePassword} from '../helpers/auth'
 import jwt from "jsonwebtoken"
+
 export async function register(req,res){
   const {name, email, password, secretQuestion, secret } = req.body;
   //Registration validation
@@ -43,7 +44,7 @@ export async function login(req,res){
     const {email,password} = req.body;
     //finding user with same email
     const user = await Account.findOne({"email": email});
-    if (!user) return res.send({success: false, message: "User not found"});
+    if (!user) return res.send({success: false, message: "Email not registered"});
     // console.log(password, user);
     //checking password
     const match = await comparePassword(password, user.password);
@@ -58,5 +59,26 @@ export async function login(req,res){
   } catch (err){
     console.log("Error in login endpoint ", err);
     res.send({success: false, message: "Error in login endpoint"});
+  }
+}
+
+export async function forgotPassword(req,res){
+  try{
+    const {email, newPassword, secretQuestion, secret} = req.body;
+    //Checking if user with the email provided exists
+    const user = await Account.findOne({"email": email});
+    if (!user) return res.send({success: false, message: "Email not registered"});
+    //checking if user's password recovery matches up with registered user's data
+    if ((user.secret != secret) || (user.secretQuestion != secretQuestion)){
+      return res.send({success: false, message: "Password recovery question answered incorrectly"})
+    }
+    else{
+      const hashed = await hashPassword(newPassword);
+      await Account.findByIdAndUpdate(user._id ,{password: hashed});
+      return res.send({success:true, message: "Password Changed Succesfully"})
+    }
+  } catch(err) {
+    console.log(err)
+    return res.send({message: "Something went wrong, try again "})
   }
 }

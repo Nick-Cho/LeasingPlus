@@ -73,7 +73,10 @@ export default function ForgotPasswordForm({
           </div>
         </>
         <div className = "form-group p-2 text-center">
-          <button type="submit" class="login-button">Submit</button>
+          <button 
+          type="submit"
+          className="login-button" 
+          disabled = {(newPassword == "") || (confirmPswd == "") || (email == "") || (secret=="")}>Submit</button>
         </div>
         
       </form>
