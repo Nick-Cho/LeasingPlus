@@ -3,6 +3,7 @@ import {UserContext} from "../../context/index.js";
 import wallpaper from "../../public/images/wallpaper.jpg"  
 import Image from "next/image"
 import { useRouter } from "next/router";
+import SearchTenants from "../../components/SearchTenants"
 export default function Dashboard() {
   const [state,setState] = useContext(UserContext);
   const [rentStatus,setRentStatus] = useState("");
@@ -22,19 +23,23 @@ export default function Dashboard() {
     else if (!state.user.rentPaid){
       setRentStatus("Rent unpaid");
     }
-  }, [state.user.rentPaid || state.user.rentCollected])
+  }, [state && (state.user.rentPaid || state.user.rentCollected)])
   return (
-    <div style = {{backgroundColor: "black",height: "auto", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
-      <div className = "row">
+    <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
+      <div className = "row container-fluid">
+        
         <div className = "mt-4 col-md-4 pb-4" style = {{backgroundColor: "rgb(30,30,30)"}}>
           <div style = {{display: "inline"}}>
             <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" style={{display: "inline"}}/>
-            <h1 style={{display: "inline"}} className = "display-3 text-light text-center">{state.user.name}</h1>
+            <h2 style={{display: "inline"}} className = "display-3 text-light text-center font">{state && state.user.name}</h2>
           </div>
           
           {state.user.landlord ? 
             (<>
-
+              <h3 className = "px-3 text-light font"> Tenants </h3>
+              {state.user.tenants.map((tenant)=>{
+                console.log(tenant)
+              })}
             </>)
             :
             (<>
@@ -49,9 +54,12 @@ export default function Dashboard() {
               style={{display:"inline"}}>
                 {rentStatus}
               </h4>
-              
             </>)
         }
+        </div>
+
+        <div className = 'offset-md-1 col-md-7'>
+          <SearchTenants/>  
         </div>
       </div>
     </div>

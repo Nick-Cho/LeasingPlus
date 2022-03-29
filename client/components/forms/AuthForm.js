@@ -48,7 +48,7 @@ function AuthForm({setShowLogin}) {
         user: response.data.user,
         token: response.data.token,
       })
-      console.log("State after calling login endpoint (from Authform component): ", state);
+      // console.log("State after calling login endpoint (from Authform component): ", state);
       window.localStorage.setItem('auth', JSON.stringify(state));
       setShowLogin(false);
       router.push("/user/dashboard")

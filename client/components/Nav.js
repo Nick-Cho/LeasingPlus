@@ -53,6 +53,10 @@ function Nav({setShowLogin}) {
                 </Link>
               </li>
               
+              <li>
+
+              </li>
+              
               <li className = "nav-item">
                 <a className = "nav-link text-light" style = {{cursor: "pointer"}} onClick = {logout}>
                   Logout

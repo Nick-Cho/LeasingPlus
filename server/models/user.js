@@ -34,13 +34,17 @@ const accountSchema = new Schema({
     type:String,
     required:true,
   },
-  // room:[roomSchema],
+  room:[roomSchema],
   password:{
     type:String,
     required:true,
     min:6,
     max:64,
   },
+  roommates:[{type: mongoose.Schema.Types.ObjectId, ref: "Account"}]
+  ,
+  tenants:[{type: mongoose.Schema.Types.ObjectId, ref: "Account"}]
+  ,
   landlord:{
     type: Boolean,
     // required:true,
