@@ -26,7 +26,7 @@ export default function Dashboard() {
   }, [state && (state.user.rentPaid || state.user.rentCollected)])
   return (
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
-      <div className = "row container-fluid">
+      <div className = "row">
         
         <div className = "mt-4 col-md-4 pb-4" style = {{backgroundColor: "rgb(30,30,30)"}}>
           <div style = {{display: "inline"}}>
@@ -37,6 +37,7 @@ export default function Dashboard() {
           {state.user.landlord ? 
             (<>
               <h3 className = "px-3 text-light font"> Tenants </h3>
+              
               {state.user.tenants.map((tenant)=>{
                 console.log(tenant)
               })}

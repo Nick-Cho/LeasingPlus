@@ -13,7 +13,7 @@ export async function searchUser(req,res){
           {"email": {$regex: query, $options: '/i'}}
         ]}
       ]
-    }).limit(10).select('_id, name, email');
+    }).limit(10).select('_id email name ');
     res.send({success:true, user});
 
   } catch(err){

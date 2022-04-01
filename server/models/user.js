@@ -6,7 +6,6 @@ const roomSchema = new Schema({
   key: {type: String},
   rent: {
     type: Number,
-    required: true,
   },
   address: {
     type: String,
