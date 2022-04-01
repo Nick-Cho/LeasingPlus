@@ -17,10 +17,10 @@ export default function SearchTenants() {
   
   return (
 
-    <div className = "row mt-4">
-      <div className = "col-md-12">
-        <form onSubmit={searchUser}>
-          <div class="form-group">
+    <div className = "mt-4">
+      <form onSubmit={searchUser}>
+        <div className=" row form-group">
+          <div className = "col-md-8">
             <input 
             type="text" 
             value = {query} 
@@ -30,12 +30,11 @@ export default function SearchTenants() {
             style = {{border: "0.2px solid white", borderRadius: "5px"}}
             />
           </div>
-          <div className = "container-fluid">
+          <div className = "container-fluid col-md-4">
             <button type="submit" className="btn btn-outline-success col-12">Search</button>
           </div>
-        </form>
-      </div>
-      
+        </div>
+      </form>
     </div>
   )
 }
