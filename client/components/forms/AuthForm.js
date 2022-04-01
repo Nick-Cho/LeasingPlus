@@ -77,10 +77,10 @@ function AuthForm({setShowLogin}) {
             <input type="email" className = "login-input text-light" placeholder="Email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
             <input type="password" className = "login-input text-light" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>     
             
-            <div>
-              <input type="checkbox" checked={!landlord} onChange={()=>{setLandlord(false)}} style={{paddingRight:"1rem"}}/>    
+            <div className="check-container">
+              <input type="checkbox"  checked={!landlord} onChange={()=>{setLandlord(false)}} style={{paddingRight:"1rem"}}/>    
               <label className="text-light px-2" >Tenant</label>     
-              <input type="checkbox" checked={landlord} onChange={()=>{setLandlord(true)}} style={{paddingRight:"1rem"}}/>    
+              <input type="checkbox"  checked={landlord} onChange={()=>{setLandlord(true)}} style={{paddingRight:"1rem"}}/>    
               <label className="text-light px-2" >Landlord</label>    
             </div>
             
