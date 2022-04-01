@@ -1,14 +1,20 @@
-import {useState} from 'react'
+import {useState,useContext} from 'react'
 import axios from 'axios';
+import {UserContext} from '../context/index'
 export default function SearchTenants() {
+  const [state, setState] = useContext(UserContext);
   const [query, setQuery] = useState("");
+  const [result, setResult] = useState([]);
   const searchUser = async (e) => {
     e.preventDefault();
     try{
       const response = await axios.get(`/search-user/${query}`) 
-      console.log(response);
       if (response.data.success == true){
-        // console.log(response.data.user)
+        setResult(response.data.user);
+        //let filtered = result.filter((p)=>{console.log(p._id != state.user._id)})
+        //console.log(filtered);
+        // setResult(filtered);
+        console.log(result);
       }
     } catch(err){
       console.log(err);

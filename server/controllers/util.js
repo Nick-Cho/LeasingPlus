@@ -6,11 +6,14 @@ export async function searchUser(req,res){
     if (!query) return res.send({message:"no query"});
   try{
     const user = await Account.find({
-      $or: [
-        {"name": {$regex: query, $options: '/i'}},
-        {"email": {$regex: query, $options: '/i'}}
-    ]
-    }).select('_id, name, email');
+      $and: [
+        {"landlord": false},
+        {$or: [
+          {"name": {$regex: query, $options: '/i'}},
+          {"email": {$regex: query, $options: '/i'}}
+        ]}
+      ]
+    }).limit(10).select('_id, name, email');
     res.send({success:true, user});
 
   } catch(err){
