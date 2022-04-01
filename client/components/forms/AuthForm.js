@@ -1,4 +1,4 @@
-import {useState, useContext} from 'react'
+import {useState, useContext,useEffect} from 'react'
 import axios from 'axios';
 import {toast} from "react-toastify";
 import {UserContext} from '../../context/index'
@@ -12,6 +12,11 @@ function AuthForm({setShowLogin}) {
   const [secret, setSecret] = useState("");
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
   const router = useRouter();
+  const [landlord,setLandlord] = useState(false);
+
+  useEffect(()=>{
+    console.log(landlord);
+  },[landlord])
   const handleSignUp = async (e) => {
     e.preventDefault();
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {
@@ -20,6 +25,7 @@ function AuthForm({setShowLogin}) {
       password,
       secretQuestion,
       secret,
+      landlord
     })
     // console.log("Return from register endpoint: ", response.data);
     if (response.data.success == true){
@@ -29,6 +35,7 @@ function AuthForm({setShowLogin}) {
       setName("");
       setEmail("");
       setSecret("");
+      setLandlord(false);
     }
     else{
       toast.error(response.data.message);
@@ -63,22 +70,26 @@ function AuthForm({setShowLogin}) {
       <div className={`login-container bg-dark ${rightPanel? "right-panel-active": ""}`}>
         <h3 onClick={()=>{setShowLogin(false)}} className = "text-light x" >x</h3>
         <div className="form-container sign-up-container bg-dark">
-          
           <form action="#" className = "bg-dark login-form" onSubmit={handleSignUp}>
             
             <h1 className = "login-h1 text-light">Create Account</h1>
             <input type="text" className = "login-input text-light" placeholder="Name" value = {name} onChange={(e)=>{setName(e.target.value)}}/>
             <input type="email" className = "login-input text-light" placeholder="Email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
             <input type="password" className = "login-input text-light" placeholder="Password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>     
-            {/* <label class="switch">
-              <input type="checkbox"/>
-              <span className="slider round"></span>
-            </label> */}
+            
+            <div>
+              <input type="checkbox" checked={!landlord} onChange={()=>{setLandlord(false)}} style={{paddingRight:"1rem"}}/>    
+              <label className="text-light px-2" >Tenant</label>     
+              <input type="checkbox" checked={landlord} onChange={()=>{setLandlord(true)}} style={{paddingRight:"1rem"}}/>    
+              <label className="text-light px-2" >Landlord</label>    
+            </div>
+            
             <select value = {secretQuestion} className = "form-control text-light bg-dark" style = {{borderColor:"gray", marginTop: "5px"}} onChange={(e)=>{setSecretQuestion(e.target.value)}}>
               <option >What is your favourite color?</option>
               <option >What is your first friend's name?</option>
               <option >What is your first pet's name?</option>
             </select>
+
             <small className = "text-muted form-text" style = {{fontSize: "12px"}}> Pick a question to use for password recovery</small>
             <input type="secret" className = "login-input text-light" value = {secret} onChange={(e)=>{setSecret(e.target.value)}} placeholder="Enter your answer" />
             

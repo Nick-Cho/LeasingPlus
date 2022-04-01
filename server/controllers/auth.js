@@ -3,7 +3,7 @@ import {hashPassword, comparePassword} from '../helpers/auth'
 import jwt from "jsonwebtoken"
 
 export async function register(req,res){
-  const {name, email, password, secretQuestion, secret } = req.body;
+  const {name, email, password, secretQuestion, secret,landlord } = req.body;
   //Registration validation
   if (!name) return res.send({success: false, message: "Name is required"});
   // console.log("Passed name check")
@@ -17,7 +17,7 @@ export async function register(req,res){
   // console.log("Passed secret check")
   const exist = await Account.findOne({"email": email});
   // console.log("Exist variable output: ", exist)
-  if (exist.email === email) return res.send({success: false, message: "Email already registered"});
+  if (exist) return res.send({success: false, message: "Email already registered"});
   // console.log("Passed duplicate error check")
   const hashedPassword = await hashPassword(password);
   const account = new Account({
@@ -26,11 +26,12 @@ export async function register(req,res){
     password: hashedPassword,
     secretQuestion: secretQuestion,
     secret: secret,
+    landlord: landlord,
   });
   try{ 
     account.save();
     return res.status(200).send({
-      ok: true,
+      success:true, message: "Succesfully Registered!"
     })
   } 
   catch(err){

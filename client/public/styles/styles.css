@@ -253,6 +253,7 @@
 .switch {
 	margin-left: -14rem;
   position: relative;
+	display: inline-block;
   width: 60px;
   height: 30px;
 	
