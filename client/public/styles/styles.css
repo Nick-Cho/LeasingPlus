@@ -249,5 +249,28 @@
 	width: 40px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.input-symbol {
+    position: relative;
+}
+.input-symbol input {
+    padding-left:18px;
+}
+.input-symbol:before {
+    position: absolute;
+    top: 0;
+    content:"$";
+    left: 5px;
+}
 

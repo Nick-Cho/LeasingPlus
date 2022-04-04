@@ -10,7 +10,7 @@ function Invite() {
   const [user, setUser] = useState({});
   const [address,setAddress] = useState("");
   const [key, setKey] = useState("");
-  const [rent, setRent] = useState("");
+  const [rent, setRent] = useState("$");
   const router = useRouter();
 
   const handleSubmit = () => {
@@ -32,7 +32,7 @@ function Invite() {
   return (
     <div className = "container-fluid" style={{backgroundColor: "black", minHeight: "100vh", paddingTop:"4rem"}}>
       <div className = "row">
-        <div className = "col">\
+        <div className = "col">
           <div className = "text-center">
             <h1 className ="display-3 text-light">{`Invite ${user.name} to your Lease?`}</h1>
             <h4 className = "display-6 text-light">{user.name}</h4>
