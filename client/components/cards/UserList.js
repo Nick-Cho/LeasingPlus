@@ -6,7 +6,7 @@ export default function UserList({tenants}) {
  
       {tenants.map((tenant)=>{
         return(
-        <div className = "row bg-dark py-2 px-3"   key = {tenant._id}>
+        <div className = "row py-2 px-3" style = {{backgroundColor: "rgb(30,30,30)"}} key = {tenant._id}>
           <div style= {{display:"inline-flex", }}>
             <h4 className="col-sm-4 text-light font">{tenant.name}</h4>
           

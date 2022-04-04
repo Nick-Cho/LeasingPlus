@@ -3,6 +3,7 @@ import {useState} from "react"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {UserProvider} from "../context/index.js";
+import "antd/dist/antd.css"
 
 import Nav from '../components/Nav'
 import Login from '../components/forms/AuthForm'

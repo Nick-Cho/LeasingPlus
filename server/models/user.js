@@ -58,6 +58,7 @@ const accountSchema = new Schema({
     type: Number,
     trim: true,
   },
+  image: {url: String, public_id:String}
 });
 
 const account = mongoose.model('Account', accountSchema)
