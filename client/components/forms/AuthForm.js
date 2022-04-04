@@ -108,12 +108,12 @@ function AuthForm({setShowLogin}) {
         <div className="overlay-container">
           <div className="overlay">
             <div className="overlay-panel overlay-left">
-              <h1 className = "login-h1">Already have an account?</h1>
+              <h1 className = "login-h1 text-light">Already have an account?</h1>
               <p>Head to the sign in page with the button below</p>
               <button className="ghost login-button" id="signIn" onClick={()=>{setRightPanel(!rightPanel)}}>Sign In</button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className = "login-h1">New to Leasing+?</h1>
+              <h1 className = "login-h1 text-light">New to Leasing+?</h1>
               <p>Enter your details and make leasing easier</p>
               <button className="ghost login-button" id="signUp"  onClick={()=>{setRightPanel(!rightPanel)}}>Sign Up</button>
             </div>

@@ -31,7 +31,7 @@ export default function ForgotPasswordForm({
         <div class="form-group p-2">
           <label className="text-muted form-text" >Email address</label>
           <input type="email" className="form-control bg-dark text-light font" placeholder="Enter email" onChange={(e)=>{setEmail(e.target.value)}}/>
-          <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          
         </div>
         <div class="form-group px-2">
           <label className="text-muted form-text" >New Password</label>
