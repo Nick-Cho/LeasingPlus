@@ -9,8 +9,9 @@ function Invite() {
   const [state, setState] = useContext(UserContext);
   const [user, setUser] = useState({});
   const [address,setAddress] = useState("");
-  const [key, setKey] = useState("");
-  const [rent, setRent] = useState("$");
+  const [roomKey, setRoomKey] = useState("");
+
+  const [rent, setRent] = useState();
   const router = useRouter();
 
   const handleSubmit = () => {
@@ -41,8 +42,8 @@ function Invite() {
           <InviteForm
             address = {address}
             setAddress = {setAddress}
-            key = {key}
-            setKey={setKey}
+            roomKey = {roomKey}
+            setRoomKey={setRoomKey}
             rent={rent}
             setRent={setRent}
             handleSubmit={handleSubmit}

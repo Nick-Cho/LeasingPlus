@@ -13,6 +13,13 @@ const roomSchema = new Schema({
   },
 });
 
+const InviteSchema = new Schema({
+  sender_id:{type: String, required: true},
+  rent: {type: Number},
+  key: {type: String},
+  room: [roomSchema]
+})
+
 const accountSchema = new Schema({
   name:{
     type: String,
