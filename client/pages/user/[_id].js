@@ -4,6 +4,7 @@ import {useContext,useState, useEffect} from "react";
 import {UserContext} from "../../context/index"
 import {Avatar} from "antd";
 import InviteForm from '../../components/forms/InviteForm'
+import {toast} from "react-toastify";
 
 function Invite() {
   const [state, setState] = useContext(UserContext);
@@ -23,6 +24,14 @@ function Invite() {
       rent,
       address
     })
+    if (response.data.success){
+      toast.success(response.data.message);
+      console.log(response.data.user);
+      router.push("/user/dashboard");
+    }
+    else if (!response.data.success){
+      toast.error(response.data.message);
+    }
     console.log("Handle Invite return: ",response)
   }
   const fetchUser = async()=> {
