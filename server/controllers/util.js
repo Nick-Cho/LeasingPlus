@@ -55,7 +55,7 @@ export async function inviteUser(req,res){
   // console.log("sender id: ", sender_id)
   try{
     const exist = await Account.find({"invites.address": address})
-    if (exist) return res.send({success:false, message: "Invite with this address already sent"})
+    if (exist == []) return res.send({success:false, message: "Invite with this address already sent"})
     const user = await Account.findByIdAndUpdate(req.params.id,{
       $addToSet: {invites: {
         sender_id: sender_id,
