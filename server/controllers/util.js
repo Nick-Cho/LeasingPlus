@@ -1,5 +1,6 @@
 import Account from "../models/user";
 import cloudinary from "cloudinary";
+const mongoose = require("mongoose")
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -44,6 +45,27 @@ export async function getUser(req,res){
     const user =  await Account.findOne({_id: req.params.id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
     // console.log("User found: ", user);
     res.send({success:true, user})
+  } catch(err){
+    console.log(err);
+  }
+}
+
+export async function inviteUser(req,res){
+  const {sender_id, roomKey,rent,address} = req.body;
+  // console.log("sender id: ", sender_id)
+  try{
+    const exist = await Account.find({"invites.address": address})
+    if (exist) return res.send({success:false, message: "Invite with this address already sent"})
+    const user = await Account.findByIdAndUpdate(req.params.id,{
+      $addToSet: {invites: {
+        sender_id: sender_id,
+        key: roomKey,
+        rent: rent,
+        address: address,
+      }}
+    },{new:true,})
+    .select("-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent")
+    res.send({success:true,user, message: "Invite sent succesfully"});
   } catch(err){
     console.log(err);
   }

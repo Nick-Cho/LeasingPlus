@@ -28,7 +28,7 @@ export default function Dashboard() {
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
         <div className = "mt-4 col-md-4 pb-4" style = {{backgroundColor: "rgb(30,30,30)"}}>
-          <div style={{}}>
+          <div>
             <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" />
             <h2 style={{display: "inline-block"}} className = "display-3 text-light text-center font">{state && state.user.name}</h2>
             

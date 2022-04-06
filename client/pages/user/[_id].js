@@ -14,8 +14,16 @@ function Invite() {
   const [rent, setRent] = useState();
   const router = useRouter();
 
-  const handleSubmit = () => {
-    console.log("handle submit")
+  const handleInvite = async(e) => {
+    e.preventDefault();
+    console.log("state user", state.user)
+    const response = await axios.post(`/invite/${router.query._id}`,{
+      sender_id: state.user._id,
+      roomKey,
+      rent,
+      address
+    })
+    console.log("Handle Invite return: ",response)
   }
   const fetchUser = async()=> {
     try{
@@ -27,6 +35,9 @@ function Invite() {
     }
   }
   useEffect(()=>{
+    if (JSON.stringify(state.user) == "{}"){
+      router.push("/")
+    }
     fetchUser()
   },[router.query._id])
   
@@ -46,7 +57,7 @@ function Invite() {
             setRoomKey={setRoomKey}
             rent={rent}
             setRent={setRent}
-            handleSubmit={handleSubmit}
+            handleInvite={handleInvite}
           />
         </div>
       </div>   

@@ -17,6 +17,7 @@ function AuthForm({setShowLogin}) {
   useEffect(()=>{
     console.log(landlord);
   },[landlord])
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/register`, {

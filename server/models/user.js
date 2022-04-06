@@ -2,24 +2,6 @@ const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema;
 
-const roomSchema = new Schema({
-  key: {type: String},
-  rent: {
-    type: Number,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-});
-
-const InviteSchema = new Schema({
-  sender_id:{type: String, required: true},
-  rent: {type: Number},
-  key: {type: String},
-  room: [roomSchema]
-})
-
 const accountSchema = new Schema({
   name:{
     type: String,
@@ -40,7 +22,16 @@ const accountSchema = new Schema({
     type:String,
     required:true,
   },
-  room:[roomSchema],
+  room:{
+    key: {type: String},
+    rent: {
+      type: Number,
+    },
+    address: {
+      type: String,
+      required: true,
+    }
+  },
   password:{
     type:String,
     required:true,
@@ -53,7 +44,7 @@ const accountSchema = new Schema({
   ,
   landlord:{
     type: Boolean,
-    // required:true,
+    required:true,
   },
   rentCollected:{
      type: Boolean,
@@ -65,8 +56,25 @@ const accountSchema = new Schema({
     type: Number,
     trim: true,
   },
-  image: {url: String, public_id:String}
+  image: {url: String, public_id:String},
+  invites: [{
+    sender_id: 
+    {
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Account",
+    }, 
+    key: {type: String},
+    rent: {
+      type: Number,
+    },
+    address: {
+      type: String,
+      required: true,
+      unique: true,
+    }
+  }]
 });
 
 const account = mongoose.model('Account', accountSchema)
+
 module.exports = account;

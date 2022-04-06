@@ -7,7 +7,7 @@ function Nav({setShowLogin}) {
   const router = useRouter(); 
 
   const logout = () =>{
-    console.log("executing logout")
+    //console.log("executing logout")
     window.localStorage.removeItem("auth");
     setState({user: {}, token: ""});
     router.push("/");

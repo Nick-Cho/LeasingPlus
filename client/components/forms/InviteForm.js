@@ -1,12 +1,12 @@
 import {useEffect} from 'react'
 
-function InviteForm({address,setAddress, key, setRoomKey, rent, setRent, handleSubmit}) {
+function InviteForm({address,setAddress, key, setRoomKey, rent, setRent, handleInvite}) {
   // useEffect(()=>{
   //   console.log(rent)
   // },[rent])
 
   return (
-    <form onSubmit={handleSubmit} className = "offset-3 col-6">
+    <form onSubmit={handleInvite} className = "offset-3 col-6">
       <div className = "form-group p-2">
         <label className="text-light form-text">Address</label>
         <input type = "text" 
