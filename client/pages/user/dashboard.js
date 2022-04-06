@@ -7,8 +7,6 @@ import SearchTenants from "../../components/SearchTenants"
 export default function Dashboard() {
   const [state,setState] = useContext(UserContext);
   const [rentStatus,setRentStatus] = useState("");
-  // useEffect(()=>{setState({user:{"test": "asdf", "name": "Nick", "landlord": false}, token: "test"})}
-  // ,[])
   const router = useRouter();
   useEffect(()=>{
     if (JSON.stringify(state.user) == "{}"){
@@ -24,11 +22,12 @@ export default function Dashboard() {
       setRentStatus("Rent unpaid");
     }
   }, [state && (state.user.rentPaid || state.user.rentCollected)])
+  
   return (
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
-        <div className = "mt-4 col-md-4 pb-4" style = {{backgroundColor: "rgb(30,30,30)"}}>
-          <div>
+        <div className = "mt-4 col-md-4 pb-4 h-25" style = {{backgroundColor: "rgb(30,30,30)"}}>
+          
             <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" />
             <h2 style={{display: "inline-block"}} className = "display-3 text-light text-center font">{state && state.user.name}</h2>
             
@@ -56,10 +55,10 @@ export default function Dashboard() {
                 </h4>
               </>)   
           }
-          </div>
+          
         </div>
         
-        <div className = 'offset-md-1 col-md-7'>
+        <div className = 'col-md-7 offset-md-1 '>
           <SearchTenants/>  
         </div>
       </div>

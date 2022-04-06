@@ -53,16 +53,20 @@ function Nav({setShowLogin}) {
                 </Link>
               </li>
               
-              <li>
-
-              </li>
-              
+              {state.user.landlord || 
+                <li className = "nav-item">
+                  <a className = "nav-link text-light">
+                    Invites
+                  </a>
+                </li>
+              }
               <li className = "nav-item">
                 <a className = "nav-link text-light" style = {{cursor: "pointer"}} onClick = {logout}>
                   Logout
                 </a>
               </li>
 
+              
               <li className = "nav-item">
                 <img/>
               </li>
