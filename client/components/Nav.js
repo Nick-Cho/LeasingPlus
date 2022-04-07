@@ -55,9 +55,11 @@ function Nav({setShowLogin}) {
               
               {state.user.landlord || 
                 <li className = "nav-item">
-                  <a className = "nav-link text-light">
-                    Invites
-                  </a>
+                  <Link className = "nav-item" href = "/user/invites">
+                    <a className = "nav-link text-light">
+                      Invites
+                    </a>
+                  </Link>
                 </li>
               }
               <li className = "nav-item">

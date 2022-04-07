@@ -13,10 +13,6 @@ function AuthForm({setShowLogin}) {
   const [secretQuestion, setSecretQuestion] = useState("What is your favourite color?");
   const router = useRouter();
   const [landlord,setLandlord] = useState(false);
-
-  useEffect(()=>{
-    console.log(landlord);
-  },[landlord])
   
   const handleSignUp = async (e) => {
     e.preventDefault();
