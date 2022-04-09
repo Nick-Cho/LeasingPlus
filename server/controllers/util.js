@@ -70,3 +70,20 @@ export async function inviteUser(req,res){
     console.log(err);
   }
 }
+
+export async function getInvite(req,res) {
+  // console.log(req.params)
+  let {invite_id, sender_id} = req.params;
+  try{
+    let user = await Account.findOne({_id: sender_id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
+    // console.log(user.invites)
+    invite_id = mongoose.Types.ObjectId(invite_id);
+    const invite = user.invites.filter(invite=>{
+      return (invite._id.equals(mongoose.Types.ObjectId(invite_id)))
+    })
+    // console.log("invite", invite);
+    return res.send({success:true, invite, user});
+  } catch (err) {
+    console.log(err);
+  }
+}

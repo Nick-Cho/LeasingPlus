@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import axios from 'axios'
+import Link from "next/link"
 function Invite({invite}) {
   const [sender, setSender] = useState();
   const getUser = async () => {
@@ -23,7 +24,9 @@ function Invite({invite}) {
       { sender &&
         <>
           <h4 className = "text-light"> {sender.name}</h4>
-          <span className="btn btn-success"> View </span>
+          <Link href = {`/user/invites/${invite._id}`}>
+            <span className="btn btn-success"> View </span>
+          </Link>
         </>
       }
       

@@ -36,7 +36,7 @@ function Invite() {
   }
   const fetchUser = async()=> {
     try{
-      const response = await axios.get(`/user/${router.query._id}`)
+      const response = await axios.get(`/get-user/${router.query._id}`)
       setUser(response.data.user)
       // console.log("Response from fetch user:", user);
     } catch(err){
