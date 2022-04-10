@@ -27,15 +27,12 @@ export default function Dashboard() {
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
         <div className = "mt-4 col-md-4 pb-4 h-25" style = {{backgroundColor: "rgb(30,30,30)"}}>
-          
             <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" />
             <h2 style={{display: "inline-block"}} className = "display-3 text-light text-center font">{state && state.user.name}</h2>
-            
-            
+             
             {state.user.landlord ? 
               (<>
                 <h3 className = "px-3 text-light font"> Tenants </h3>
-                
                 {state.user.tenants.map((tenant)=>{
                   console.log(tenant)
                 })}
@@ -55,12 +52,14 @@ export default function Dashboard() {
                 </h4>
               </>)   
           }
-          
         </div>
         
-        <div className = 'col-md-7 offset-md-1 '>
-          <SearchTenants/>  
-        </div>
+        {state.user.landlord &&
+          <div className = 'col-md-7 offset-md-1 '>
+            <SearchTenants/>  
+          </div>
+        }
+          
       </div>
     </div>
   )

@@ -15,7 +15,6 @@ function InvitesList({invites}) {
               <div>
                   <Invite invite={invite}/>
               </div>
-              
             }
           />
         </List.Item>
