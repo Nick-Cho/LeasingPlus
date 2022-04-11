@@ -33,6 +33,8 @@ export async function getInvite(req,res) {
       return (invite._id.equals(mongoose.Types.ObjectId(invite_id)))
     })
     // console.log("invite", invite);
+    user = await Account.findOne({id:invite[0].sender_id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
+    
     return res.send({success:true, invite, user});
   } catch (err) {
     console.log(err);
@@ -41,8 +43,14 @@ export async function getInvite(req,res) {
 
 export async function denyInvite(req,res){
   try{
-
+    const {invite_id} = req.params;
+    const {user_id} = req.body;
+    let user = await Account.findOne({id:user_id});
+    user.invites.filter((invite)=>{
+      return (!invite._id.equals(mongoose.Types.ObjectId(invite_id)));
+    })
+    console.log(user)
   } catch(err){
-    
+    console.log(err);
   }
 }
