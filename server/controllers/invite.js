@@ -43,13 +43,17 @@ export async function getInvite(req,res) {
 
 export async function denyInvite(req,res){
   try{
-    const {invite_id} = req.params;
-    const {user_id} = req.body;
-    let user = await Account.findOne({id:user_id});
-    user.invites.filter((invite)=>{
-      return (!invite._id.equals(mongoose.Types.ObjectId(invite_id)));
+    let {user, invite_id} = req.body; 
+    user = await Account.findOne({_id: user._id})  
+    //let user = await Account.findOne({id:user_id});
+    const invites = user.invites.filter((invite)=>{
+      // console.log(!(invite._id.equals(mongoose.Types.ObjectId(invite_id))));
+      return (!(invite._id.equals(mongoose.Types.ObjectId(invite_id))));
     })
-    console.log(user)
+    user.invites = invites;
+    let new_user = await Account.findByIdAndUpdate(user._id, user, {new:true});
+    return res.send({success: true, new_user})
+    // console.log(user)
   } catch(err){
     console.log(err);
   }

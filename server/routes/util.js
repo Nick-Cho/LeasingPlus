@@ -7,5 +7,4 @@ router.get('/search-user/:query', searchUser);
 router.post('/upload-image', formidable({maxFileSize: 5 *1024* 1024}), uploadImage);
 router.get('/get-user/:id', getUser);
 
-
 module.exports = router;

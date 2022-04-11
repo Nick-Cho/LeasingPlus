@@ -39,15 +39,15 @@ export default function Dashboard() {
               </>)
               :
               (<>
-                <h4 className = "px-3 text-light">Monthly Rent: ${state.user.rent}</h4>
-                <h4 className = "px-3 text-light" style = {{display: "inline"}}>Rent Status: </h4>
+                <h4 className = "px-3 text-light font">Monthly Rent: ${state.user.rent}</h4>
+                <h4 className = "px-3 text-light font" style = {{display: "inline"}}>Rent Status: </h4>
                 <h4 
-                className = {`
+                className = {`font 
                 ${rentStatus === "Rent collected"? "text-success": 
                 rentStatus === "Rent processing" ? "text-warning": 
                 "text-danger" }
                 `}
-                style={{display:"inline"}}>
+                style={{display:"inline", fontWeight: "bold"}}>
                   {rentStatus}
                 </h4>
               </>)   

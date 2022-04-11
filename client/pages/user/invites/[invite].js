@@ -2,6 +2,7 @@ import {useState, useContext, useEffect} from 'react'
 import {UserContext} from '../../../context/index'
 import axios from 'axios';
 import {useRouter} from "next/router";
+import {toast} from "react-toastify"
 function ViewInvite() {
   const [invite, setInvite]= useState();
   const router = useRouter();
@@ -9,10 +10,15 @@ function ViewInvite() {
   const [landlord, setLandlord] = useState();
 
   const handleDeny = async (e) => {
-    const response = await axios.put(`/deny-invite/${invite._id}`, {
-      user_id: state.user._id,
+    const response = await axios.put(`/deny-invite`, {
+      user: state.user,
+      invite_id: invite[0]._id,
     });
     
+    if (response.data.success){
+      toast.error("Invite Denied");
+      getInvite();
+    }
   }
 
   const handleAccept = async (e) => {
