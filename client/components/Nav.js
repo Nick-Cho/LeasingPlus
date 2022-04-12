@@ -10,10 +10,11 @@ function Nav({setShowLogin}) {
     //console.log("executing logout")
     window.localStorage.removeItem("auth");
     setState({user: {}, token: ""});
+    // console.log(state);
     router.push("/");
   }
   //For Testing
-  useEffect(()=>{console.log(state.user)}
+  useEffect(()=>{console.log("state user from nav" ,state.user)}
   ,[])
 
   return (
@@ -44,7 +45,7 @@ function Nav({setShowLogin}) {
         </div>}
 
 
-        {(state && JSON.stringify(state.user) !== "{}" ) &&
+        {state && state.user && JSON.stringify(state.user) !=="{}" && 
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav">
               <li className = "nav-item">
@@ -53,7 +54,7 @@ function Nav({setShowLogin}) {
                 </Link>
               </li>
               
-              {state.user.landlord || 
+              {state && state.user && state.user.landlord || 
                 <li className = "nav-item">
                   <Link className = "nav-item" href = "/user/invites">
                     <a className = "nav-link text-light">
@@ -68,7 +69,6 @@ function Nav({setShowLogin}) {
                 </a>
               </li>
 
-              
               <li className = "nav-item">
                 <img/>
               </li>

@@ -58,3 +58,37 @@ export async function denyInvite(req,res){
     console.log(err);
   }
 }
+
+export async function acceptInvite(req,res) {
+  try{
+    let {user, invite_id} = req.body;
+    user = await Account.findOne({_id: user._id})
+    //Pulling the accepted invite
+    const invite = user.invites.filter((i)=>{
+      return (i._id.equals(mongoose.Types.ObjectId(invite_id)));
+    })
+    //Updating the rest of the invites
+    const invites = user.invites.filter((i)=>{
+      return !(i._id.equals(mongoose.Types.ObjectId(invite_id)));
+    })
+    user.invites = invites;
+    
+    //Creating variable to update room 
+    user.room = {
+      key: invite[0].key,
+      rent: invite[0].rent,
+      address: invite[0].address,
+    };
+    let landlord = await Account.findOne({_id: invite[0].sender_id})
+    if (landlord.tenants.length != 0){
+      user.roommates = landlord.tenants;
+    }
+    landlord.tenants.push(user._id);
+    
+    const new_landlord = await Account.findByIdAndUpdate(invite[0].sender_id, landlord, {new:true})
+    const new_user = await Account.findByIdAndUpdate(user._id, user, {new:true})
+    return res.send({success:true, new_landlord, new_user});
+  } catch (err) {
+    console.log(err);
+  }
+}

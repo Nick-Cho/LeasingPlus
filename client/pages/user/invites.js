@@ -7,8 +7,6 @@ function Invites() {
   const [invites, setInvites] = useState([]);
   const router = useRouter();
 
-  
-
   useEffect(()=>{
     if (JSON.stringify(state.user) == "{}"){
       router.push("/")
@@ -20,8 +18,17 @@ function Invites() {
     <div className = "container-fluid" style = {{paddingTop: "4rem", backgroundColor: "black", minHeight: "100vh"}}>
       <div className = "row">
         <div className = "offset-md-2 col-md-8">
-          <h1 className = "display-3 text-center text-light header">Invites</h1>
-          <InvitesList invites={invites}/>
+          {state.user && state.user.invites && state.user.invites.length == 0 ?
+            <h1 className = "display-3 text-center text-light header">No Invites</h1>
+            :
+            (
+              <>
+                <h1 className = "display-3 text-center text-light header">Invites</h1>
+                <InvitesList invites={invites}/>
+              </>
+            )
+          }
+          
         </div>
       </div>
     </div>

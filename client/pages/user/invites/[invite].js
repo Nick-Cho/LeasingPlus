@@ -17,12 +17,25 @@ function ViewInvite() {
     
     if (response.data.success){
       toast.error("Invite Denied");
-      getInvite();
+      setState(response.data.new_user)
+      router.push('/user/invites')
     }
   }
 
   const handleAccept = async (e) => {
-    
+    const response = await axios.put(`/accept-invite`, {
+      user: state.user,
+      invite_id: invite[0]._id,
+    })
+    console.log("handle accept response: ",response)
+    if (response.data.success){
+      toast.success("Invite Accepted")
+      setState(response.data.new_user)
+      window.localStorage.setItem('auth', JSON.stringify(state))
+      console.log(state);
+      router.push('/user/dashboard')
+    }
+
   }
 
   const getInvite = async (e) => {

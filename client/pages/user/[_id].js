@@ -26,13 +26,13 @@ function Invite() {
     })
     if (response.data.success){
       toast.success(response.data.message);
-      console.log(response.data.user);
+      // console.log(response.data.user);
       router.push("/user/dashboard");
     }
     else if (!response.data.success){
       toast.error(response.data.message);
     }
-    console.log("Handle Invite return: ",response)
+    // console.log("Handle Invite return: ",response)
   }
   const fetchUser = async()=> {
     try{
