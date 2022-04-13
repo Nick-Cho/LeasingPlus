@@ -4,19 +4,29 @@ import wallpaper from "../../public/images/wallpaper.jpg"
 import Image from "next/image"
 import { useRouter } from "next/router";
 import SearchTenants from "../../components/SearchTenants"
+import axios from "axios";
 export default function Dashboard() {
   const [state,setState] = useContext(UserContext);
   const [rentStatus,setRentStatus] = useState("");
+  const [tenants,setTenants] = useState([]);
   const [roommates,setRoommates] = useState([]);
   const router = useRouter();
 
   const getRoommates = async() => {
+    
+  }
 
+  const getTenants = async() => {
+    state.user.tenants.map((tenant)=>{
+      axios.get(`/get-user/${tenant}`)
+      .then(response=> tenants.push(response.data.user))      
+    })
+    
   }
 
 
   useEffect(()=>{
-    console.log("state from dashboard: ", state.user)
+    // console.log("state from dashboard: ", state.user)
     if (state.user == undefined || JSON.stringify(state.user) == "{}"){
       router.push("/")
     }
@@ -32,8 +42,9 @@ export default function Dashboard() {
   }, [state && state.user && (state.user.rentPaid || state.user.rentCollected)])
   
   useEffect(()=>{
-    getRoommates();
+    // getRoommates();
     
+    getTenants();
   },[])
   
   return (
@@ -46,9 +57,7 @@ export default function Dashboard() {
             {state && state.user && state.user.landlord ? 
               (<>
                 <h3 className = "px-3 text-light font"> Tenants </h3>
-                {state.user.tenants.map((tenant)=>{
-                  console.log(tenant)
-                })}
+                
               </>)
               :
               (<>
