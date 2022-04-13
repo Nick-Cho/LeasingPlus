@@ -27,12 +27,14 @@ function ViewInvite() {
       user: state.user,
       invite_id: invite[0]._id,
     })
-    console.log("handle accept response: ",response)
+    // console.log("handle accept response: ",response)
     if (response.data.success){
       toast.success("Invite Accepted")
-      setState(response.data.new_user)
+        console.log("New User: ", response.data.new_user)
+      setState({user: response.data.new_user, token: state.token});
+      // setState({user:{name:"Nick"}})
       window.localStorage.setItem('auth', JSON.stringify(state))
-      console.log(state);
+      
       router.push('/user/dashboard')
     }
 

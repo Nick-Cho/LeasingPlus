@@ -13,6 +13,8 @@ export default function Dashboard() {
   const getRoommates = async() => {
 
   }
+
+
   useEffect(()=>{
     console.log("state from dashboard: ", state.user)
     if (state.user == undefined || JSON.stringify(state.user) == "{}"){
@@ -31,7 +33,9 @@ export default function Dashboard() {
   
   useEffect(()=>{
     getRoommates();
+    
   },[])
+  
   return (
       <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">

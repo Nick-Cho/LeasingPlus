@@ -79,12 +79,19 @@ export async function acceptInvite(req,res) {
       rent: invite[0].rent,
       address: invite[0].address,
     };
+    //Updating Tenants and Roommates array
     let landlord = await Account.findOne({_id: invite[0].sender_id})
     if (landlord.tenants.length != 0){
       user.roommates = landlord.tenants;
     }
     landlord.tenants.push(user._id);
-    
+    //Updating roommates array for the other roommates
+    for (let i = 0; i < landlord.tenants.length; i++){
+      let tenant = await Account.findOne({_id: landlord.tenants[i]})
+      tenant.roommates.push(user._id);
+      await Account.findByIdAndUpdate(landlord.tenants[i], tenant);
+    }
+   
     const new_landlord = await Account.findByIdAndUpdate(invite[0].sender_id, landlord, {new:true})
     const new_user = await Account.findByIdAndUpdate(user._id, user, {new:true})
     return res.send({success:true, new_landlord, new_user});
