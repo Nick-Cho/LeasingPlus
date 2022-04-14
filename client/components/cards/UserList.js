@@ -4,9 +4,9 @@ import {UserContext} from '../../context/index'
 import {useContext, useEffect} from "react"
 export default function UserList({tenants}) {
   const [state,setState] = useContext(UserContext)
-  useEffect(()=>{
-    console.log(state.user.tenants.includes(tenants[0]._id))
-  },[])
+  // useEffect(()=>{
+  //   console.log(state.user.tenants.includes(tenants[0]._id))
+  // },[])
   return (
     <div className = "mt-3" style={{backgroundColor: "rgb(30,30,30)"}} >
       <List itemLayout="horizontal" dataSource = {tenants} renderItem={(tenant)=> (

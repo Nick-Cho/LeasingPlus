@@ -79,6 +79,7 @@ export async function acceptInvite(req,res) {
       rent: invite[0].rent,
       address: invite[0].address,
     };
+    
     //Updating Tenants and Roommates array
     let landlord = await Account.findOne({_id: invite[0].sender_id})
     if (landlord.tenants.length != 0){

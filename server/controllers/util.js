@@ -42,7 +42,12 @@ export async function uploadImage(req,res){
 }
 export async function getUser(req,res){
   try{
-    const user =  await Account.findOne({_id: req.params.id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
+    let {id} = req.params 
+    if (typeof req.params.id == "string"){
+      id = mongoose.Types.ObjectId(id)
+    }
+    // console.log("req.params.id from getUser: ",id)
+    const user =  await Account.findOne({_id: id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
     // console.log("User found: ", user);
     res.send({success:true, user})
   } catch(err){
