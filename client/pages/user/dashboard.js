@@ -1,4 +1,4 @@
-import {useContext, useState,useEffect, useRef} from "react";
+import {useContext, useState,useEffect} from "react";
 import {UserContext} from "../../context/index.js";
 import wallpaper from "../../public/images/wallpaper.jpg"  
 import Image from "next/image"
@@ -14,12 +14,18 @@ export default function Dashboard() {
   const router = useRouter();
   
   const getRoommates = async() => {
-    
+    if (roommates.length >= state.user.roommates.length){
+      return;
+    }
+    state && state.user && state.user.roommates && state.user.roommates.map((roommate)=>{
+      axios.get(`/get-user/${roommate}`)
+      .then((response)=> {roommates.push(response.data.user); setRoommates([...roommates])})
+    })
   }
 
   const getTenants = () => {    
-    if (tenants.length == state.user.tenants.length){
-      return  ;
+    if (tenants.length >= state.user.tenants.length){
+      return;
     }
     state && state.user && state.user.tenants && state.user.tenants.map((tenant)=>{
       axios.get(`/get-user/${tenant}`)
@@ -45,7 +51,7 @@ export default function Dashboard() {
   }, [state && state.user && (state.user.rentPaid || state.user.rentCollected)])
   
   useEffect(()=>{
-    // getRoommates();
+    getRoommates();
     getTenants();
   },[])
   
@@ -104,6 +110,15 @@ export default function Dashboard() {
                 style = {{paddingTop:"2rem"}}>
                 Roommates
                 </h3>
+                {roommates && roommates.map((roommate)=>{
+                  console.log(roommate)
+                  return(
+                    <div className = "px-3">
+                      <h4 className = "font text-light">{roommate.name}</h4>
+                    </div>
+                  )
+                })
+                }
               </>)   
             }
         </div>  
