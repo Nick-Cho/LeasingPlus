@@ -69,7 +69,7 @@ export default function Dashboard() {
   },[])
   
   return (
-      <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
+    <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
         <DashboardSidebar wallpaper={wallpaper} tenants={tenants} roommates={roommates} rentStatus={rentStatus}/>
         {state && state.user && state.user.landlord &&
@@ -79,7 +79,7 @@ export default function Dashboard() {
         } 
         {state && state.user && !state.user.landlord && 
           <div className = 'col-md-7 offset-md-1'>
-
+            <Chores/>
           </div>
         }     
       </div>

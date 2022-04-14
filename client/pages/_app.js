@@ -8,11 +8,13 @@ import "antd/dist/antd.css"
 import Nav from '../components/Nav'
 import Login from '../components/forms/AuthForm'
 import '../public/styles/styles.css'
+
+import Chores from '../components/cards/Chores'
 function MyApp({ Component, pageProps }) {
   const [showLogin, setShowLogin] = useState(false)
   return( 
     <UserProvider >
-      <div style ={{filter: showLogin ? "blur(4px)" : ""}}>
+      {/* <div style ={{filter: showLogin ? "blur(4px)" : ""}}>
         <Nav setShowLogin={setShowLogin}/>
       </div>
       
@@ -24,8 +26,8 @@ function MyApp({ Component, pageProps }) {
       <ToastContainer/>
       <div style ={{filter: showLogin ? "blur(4px)" : ""}}>
         <Component {...pageProps} />
-      </div>
-      
+      </div> */}
+      <Chores/>
     </UserProvider>
   )
 }
