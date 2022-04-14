@@ -47,7 +47,7 @@ export async function getUser(req,res){
       id = mongoose.Types.ObjectId(id)
     }
     // console.log("req.params.id from getUser: ",id)
-    const user =  await Account.findOne({_id: id}).select('-password -secret -secretQuestion -roommates -rentCollected -rentPaid -rent')
+    const user =  await Account.findOne({_id: id}).select('-password -secret -secretQuestion -roommates -rent')
     // console.log("User found: ", user);
     res.send({success:true, user})
   } catch(err){

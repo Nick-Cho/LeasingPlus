@@ -14,7 +14,7 @@ export default function Dashboard() {
   const router = useRouter();
   
   const getRoommates = async() => {
-    if (roommates.length >= state.user.roommates.length){
+    if (roommates.length >= state && state.user && state.user.roomates && state.user.roommates.length){
       return;
     }
     state && state.user && state.user.roommates && state.user.roommates.map((roommate)=>{
@@ -24,7 +24,7 @@ export default function Dashboard() {
   }
 
   const getTenants = () => {    
-    if (tenants.length >= state.user.tenants.length){
+    if (tenants.length >= state && state.user && state.user.tenants && state.user.tenants.length){
       return;
     }
     state && state.user && state.user.tenants && state.user.tenants.map((tenant)=>{
@@ -71,6 +71,7 @@ export default function Dashboard() {
                 <h2 className = "px-3 text-light font"> Tenants </h2>
                 
                 {tenants && tenants.map((tenant)=>{
+                  console.log(tenant)
                 return(
                   <div className = "px-3 pt-2 pb-2" style = {{borderTop: "1px solid rgba(70, 70, 70, 1)"}}>
                     <h3 className = "font text-light">{tenant.name}</h3>
@@ -111,7 +112,6 @@ export default function Dashboard() {
                 Roommates
                 </h3>
                 {roommates && roommates.map((roommate)=>{
-                  console.log(roommate)
                   return(
                     <div className = "px-3">
                       <h4 className = "font text-light">{roommate.name}</h4>
