@@ -2,13 +2,13 @@ import React,{useEffect, useState} from 'react'
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 import ChoresColumn from './ChoresColumn'
 export default function Chores() {
-const [columns, setColumns] = useState([])
+const [columns, setColumns] = useState([]);
 
 useEffect(()=>{
   setColumns(exampleColumns)
 },[])
 const onDragEnd = ({ source, destination }) => {
-  console.log(source, destination)
+  // console.log(source, destination)
   // const items = Array.from(columns);
   // Make sure we have a valid destination
   if (destination === undefined || destination === null) return null
@@ -20,31 +20,32 @@ const onDragEnd = ({ source, destination }) => {
   )
     return null
   
-  const start = columns[source.droppableId]
-  const end = columns[destination.droppableId]
-  console.log(start, end)
-  if (start === end){
-    const newChores = start.chores.splice(source.index, 1);  
-    newChores.splice(destination.index, 0 ,start.chores[source.index])
+  const start =  columns.filter((column)=> {return String(source.droppableId) == String(column.name)})
+  const end = columns.filter((column)=>{return String(destination.droppableId) == String(column.name)})
+
+  if (JSON.stringify(start) === JSON.stringify(end)){
+    
+    const chores = Array.from(start[0].chores)
+    const [newChore] = chores.splice(source.index, 1);  
+    
+    chores.splice(destination.index, 0 , newChore);
     const newCol={
-      name: start.name, 
-      chores: newChores,
+      name: start[0].name, 
+      chores: chores,
     }
+    // console.log(newCol)
+    const newColumns = Array.from(columns);
+    newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newCol.name))})] = newCol;
+    // console.log(newColumns.findIndex((element)=>{return(String(element.name) == String(newCol.name))}))
     // Move the item within the list
     // Start by making a new list without the dragged item
-    setColumns(...columns, newCol);
+    setColumns(newColumns);
+    
     return null
     }
   return null;
 }
 
-const handleDragEnd = (result)=>{
-   console.log(result.source, result.destination)
-  // const items = Array.from(chores);
-  // const [reorderedItem] = items.splice(result.source.index, 1);
-  // items.splice(result.destination.index, 0 ,reorderedItem);
-  // setChores(items);
-}
 
 const exampleColumns = [
   { 
@@ -85,7 +86,7 @@ const exampleColumns = [
   }
 ]
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <div
         style={{
           display: 'grid',
@@ -95,10 +96,10 @@ const exampleColumns = [
           gap: '8px'
         }}
       >
-        {columns.map((column)=>{
+        {columns.map((column, index)=>{
           return(
           <div>
-            <ChoresColumn column = {column}/>
+            <ChoresColumn column = {column} index = {index}/>
           </div>
           )}
         )}
