@@ -1,8 +1,8 @@
 import React from 'react'
 import {Droppable, Draggable} from "react-beautiful-dnd"
-function ChoresColumn({chores}) {
+function ChoresColumn({column}) {
   return (
-    <Droppable droppableId = "col-1">
+    <Droppable droppableId = {column.name}>
       {provided => ( 
       <div
         style={{
@@ -12,9 +12,10 @@ function ChoresColumn({chores}) {
         {...provided.droppableProps}
         ref = {provided.innerRef}
       >
-        {chores.map(({_id,name, details, completed}, index)=>{
+        <h2>{column.name}</h2>
+        {column.chores.map(({_id,name, details, completed}, index)=>{
           return (
-            <Draggable key = {_id} draggableId = {_id} index = {index}>
+            <Draggable key = {_id} draggableId = {name} index = {index}>
               {provided => (
               <div
               ref ={provided.innerRef}
