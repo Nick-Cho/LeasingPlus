@@ -9,7 +9,7 @@ import Nav from '../components/Nav'
 import Login from '../components/forms/AuthForm'
 import '../public/styles/styles.css'
 
-import Chores from '../components/cards/Chores'
+import Chores from '../components/cards/ChoresList'
 function MyApp({ Component, pageProps }) {
   const [showLogin, setShowLogin] = useState(false)
   return( 
