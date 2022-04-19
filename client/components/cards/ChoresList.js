@@ -27,22 +27,36 @@ const onDragEnd = ({ source, destination }) => {
     
     const chores = Array.from(start[0].chores)
     const [newChore] = chores.splice(source.index, 1);  
-    
     chores.splice(destination.index, 0 , newChore);
     const newCol={
       name: start[0].name, 
       chores: chores,
     }
-    // console.log(newCol)
     const newColumns = Array.from(columns);
     newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newCol.name))})] = newCol;
-    // console.log(newColumns.findIndex((element)=>{return(String(element.name) == String(newCol.name))}))
-    // Move the item within the list
-    // Start by making a new list without the dragged item
     setColumns(newColumns);
-    
     return null
+  } 
+  else{
+    const newStartChores = start[0].chores.filter((chore)=>{return String(chore.name) !== String(start[0].chores[source.index].name)});
+    const newStartCol = {
+      name: start[0].name,
+      chores: newStartChores
     }
+    const newEndChores = end[0].chores;
+    newEndChores.splice(destination.index, 0 ,start[0].chores[source.index])
+    const newEndCol= {
+      name: end[0].name,
+      chores: newEndChores,
+    }
+    const newColumns = Array.from(columns);
+    newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newStartCol.name))})] = newStartCol;
+    newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newEndCol.name))})] = newEndCol;
+    setColumns(newColumns);
+    return null;
+  }
+
+
   return null;
 }
 
