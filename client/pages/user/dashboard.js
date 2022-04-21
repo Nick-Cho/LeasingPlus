@@ -5,8 +5,8 @@ import wallpaper from "../../public/images/wallpaper.jpg"
 import { useRouter } from "next/router";
 
 import SearchTenants from "../../components/SearchTenants"
-import DashboardSidebar from '../../components/cards/DashboardSidebar'
-import Chores from '../../components/cards/Chores'
+import DashboardSidebar from '../../components/DashboardSidebar'
+import Chores from '../../components/cards/ChoresList'
 export default function Dashboard() {
   const [state,setState] = useContext(UserContext);
   const [rentStatus,setRentStatus] = useState("");
@@ -45,7 +45,8 @@ export default function Dashboard() {
 
 
   useEffect(()=>{
-    if (state && state.user == undefined || JSON.stringify(state.user) == "{}"){
+    console.log(state)
+    if (!state && !state.user){
       router.push("/")
     }
     if (state && state.user && state.user.rentCollected){
@@ -79,6 +80,7 @@ export default function Dashboard() {
         } 
         {state && state.user && !state.user.landlord && 
           <div className = 'col-md-7 offset-md-1'>
+            <h4 className="text-light text-center display-4 font">Chores</h4>
             <Chores/>
           </div>
         }     
