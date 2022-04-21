@@ -6,7 +6,7 @@ function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
   const [state,setState] = useContext(UserContext);
   const router = useRouter();
   return (
-    <div className = "mt-4 col-md-4 pb-2 h-25" style = {{backgroundColor: "rgb(30,30,30)"}}>
+    <div className = "mt-4 col-md-4 pb-2 h-25" style = {{backgroundColor: "rgb(20,20,23)", borderRadius: "10px"}}>
         <Image src = {wallpaper} width={75} height={65} className ="px-3 pt-4" alt = "" />
         <h2 style={{display: "inline-block"}} className = "display-3 text-light text-center font">{state && state.user && state.user.name}</h2>
           

@@ -79,7 +79,7 @@ export default function Dashboard() {
           </div>
         } 
         {state && state.user && !state.user.landlord && 
-          <div className = 'col-md-7 offset-md-1'>
+          <div className = 'mt-4 col-md-7 offset-md-1' style = {{backgroundColor: "rgb(20,20,23)", borderRadius: "15px"}}>
             <h4 className="text-light text-center display-4 font">Chores</h4>
             <Chores/>
           </div>
