@@ -74,7 +74,7 @@ export default function Dashboard() {
   }
 
   useEffect(()=>{
-    console.log(state)
+    // console.log(state)
     if (!state && !state.user || state.token === ""){
       router.push("/")
     }
@@ -112,7 +112,7 @@ export default function Dashboard() {
           <div className = 'offset-md-1 mt-4 col-md-7 ' style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "15px"}}>
             <h4 className="mt-2 text-light text-center display-4 font">Chores</h4>
             <div>
-              <Chores chores = {chores}/>
+              {chores && <Chores choresObject = {chores}/>}
               {
                 showAddChore ?
                 <ChoreForm handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />

@@ -2,15 +2,15 @@ import React,{useEffect, useState} from 'react'
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 import ChoresColumn from './ChoresColumn'
 import axios from "axios"
-export default function Chores({chores}) {
+export default function Chores({choresObject}) {
 const [columns, setColumns] = useState([]);
 
 useEffect(()=>{
-  setColumns(chores)
+  setColumns(choresObject);
 },[])
 
 //function to update the chores array when moved in the drag and drop
-const onDragEnd = ({ source, destination }) => {
+const onDragEnd = async ({ source, destination }) => {
   // Make sure we have a valid destination
   if (destination === undefined || destination === null) return null
 
@@ -19,10 +19,12 @@ const onDragEnd = ({ source, destination }) => {
     destination.index === source.index &&
     source.droppableId === destination.droppableId
   )
-    return null
+  {return null}
   
   const start =  columns.filter((column)=> {return String(source.droppableId) == String(column.name)})
   const end = columns.filter((column)=>{return String(destination.droppableId) == String(column.name)})
+
+  const choreToUpdate = start[0].chores[source.index];
 
   if (JSON.stringify(start) === JSON.stringify(end)){
     
@@ -55,6 +57,10 @@ const onDragEnd = ({ source, destination }) => {
     setColumns(newColumns);
   }
   
+  const response = await axios.put(`/update-chore`,{
+    chore: choreToUpdate,
+    new_user_id: end[0].user_id,
+  })
   return null;
 }
 
@@ -69,7 +75,7 @@ const onDragEnd = ({ source, destination }) => {
           gap: '8px'
         }}
       >
-        {columns.map((column, index)=>{
+        {columns && columns.map((column, index)=>{
           return(
           <div>
             <ChoresColumn column = {column} index = {index}/>

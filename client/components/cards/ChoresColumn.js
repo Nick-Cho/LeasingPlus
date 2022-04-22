@@ -20,13 +20,13 @@ function ChoresColumn({column}) {
           return (
             <Draggable key = {_id} draggableId = {name} index = {index}>
               {provided => (
-              <div
+              <div className = "d-flex justify-content-between"
               ref ={provided.innerRef}
               {...provided.draggableProps}
               {...provided.dragHandleProps} 
               >
                 <h5 className = "text-light" style={{display:"inline"}}>{name}</h5>
-                <input  style={{display:"inline", marginLeft: "1rem"}} type= "checkbox"/>
+                <input style={{ marginLeft: "1rem"}} type= "checkbox"/>
               </div>)}
             </Draggable>
           )
