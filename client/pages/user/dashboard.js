@@ -20,6 +20,7 @@ export default function Dashboard() {
   
   const [showAddChore, setShowAddChore] = useState(false);
   const [chore, setChore] = useState("");
+  const [chores,setChores] = useState();
   const getRoommates = async() => {
     if (roommates.length >= state && state.user && state.user.roomates && state.user.roommates.length){
       return;
@@ -48,7 +49,9 @@ export default function Dashboard() {
 
   const getChores = async () => {
     const response = await axios.get(`/get-chores/${state.user._id}`)
-    console.log(response);
+    if (response.data.success){
+      setChores(response.data.roommates)
+    }
   }
 
   const handleAddChore = async (e) => {
@@ -67,10 +70,8 @@ export default function Dashboard() {
     }
     else{
       toast.error("Error Adding Chore")
-    }
-    
+    }    
   }
-
 
   useEffect(()=>{
     console.log(state)
@@ -90,6 +91,7 @@ export default function Dashboard() {
   
   useEffect(()=>{
     if (!stop){
+      getChores();
       getRoommates();
       getTenants();
       setStop(true);
@@ -110,7 +112,7 @@ export default function Dashboard() {
           <div className = 'offset-md-1 mt-4 col-md-7 ' style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "15px"}}>
             <h4 className="mt-2 text-light text-center display-4 font">Chores</h4>
             <div>
-              <Chores/>
+              <Chores chores = {chores}/>
               {
                 showAddChore ?
                 <ChoreForm handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />

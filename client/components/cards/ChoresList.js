@@ -1,11 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 import ChoresColumn from './ChoresColumn'
-export default function Chores() {
+import axios from "axios"
+export default function Chores({chores}) {
 const [columns, setColumns] = useState([]);
 
 useEffect(()=>{
-  setColumns(exampleColumns)
+  setColumns(chores)
 },[])
 
 //function to update the chores array when moved in the drag and drop
@@ -35,7 +36,6 @@ const onDragEnd = ({ source, destination }) => {
     const newColumns = Array.from(columns);
     newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newCol.name))})] = newCol;
     setColumns(newColumns);
-    return null
   } 
   else{
     const newStartChores = start[0].chores.filter((chore)=>{return String(chore.name) !== String(start[0].chores[source.index].name)});
@@ -53,50 +53,11 @@ const onDragEnd = ({ source, destination }) => {
     newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newStartCol.name))})] = newStartCol;
     newColumns[newColumns.findIndex((element)=>{return(String(element.name) == String(newEndCol.name))})] = newEndCol;
     setColumns(newColumns);
-    return null;
   }
+  
   return null;
 }
 
-
-const exampleColumns = [
-  { 
-    name: "Julie",
-    chores: [{
-      _id: "12321asd",
-      user_id: "2342351ad123asd",
-      name: "Clean Dishes",
-      details: "",
-      completed: false,
-      },
-      {
-        _id: "123123",
-        user_id: "123asd2asd2",
-        name: "Take out trash",
-        details: "",
-        completed:true,
-      },
-      {
-        _id:"1asdf3asf",
-        user_id: "123asd8asd82",
-        name:"Clean Washroom",
-        details: "",
-        completed:false,  
-      }]
-  },
-  {
-    name: "Nick",
-    chores: []
-  },
-  {
-    name: "Sarah",
-    chores: []
-  },
-  {
-    name: "Ron",
-    chores:[]
-  }
-]
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div
