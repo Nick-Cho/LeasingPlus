@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-import Account from "./user";
+
 
 const Schema = mongoose.Schema;
 
@@ -11,9 +11,6 @@ const choreSchema = new Schema({
   name: {
     type: String,
     required: true,
-  },
-  details: {
-    type: String
   },
   completed: {
     type: Boolean, 

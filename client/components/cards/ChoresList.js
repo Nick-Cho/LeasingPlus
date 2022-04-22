@@ -7,9 +7,9 @@ const [columns, setColumns] = useState([]);
 useEffect(()=>{
   setColumns(exampleColumns)
 },[])
+
+//function to update the chores array when moved in the drag and drop
 const onDragEnd = ({ source, destination }) => {
-  // console.log(source, destination)
-  // const items = Array.from(columns);
   // Make sure we have a valid destination
   if (destination === undefined || destination === null) return null
 
@@ -55,8 +55,6 @@ const onDragEnd = ({ source, destination }) => {
     setColumns(newColumns);
     return null;
   }
-
-
   return null;
 }
 
@@ -104,9 +102,9 @@ const exampleColumns = [
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateColumns: '2fr 2fr 2fr',
           margin: '24px auto',
-          width: '80%',
+          width: '90%',
           gap: '8px'
         }}
       >
@@ -117,31 +115,8 @@ const exampleColumns = [
           </div>
           )}
         )}
-        
       </div>
     </DragDropContext>
-    // <DragDropContext onDragEnd={handleDragEnd}>
-    //   <Droppable droppableId="chores">
-    //     {(provided)=>
-    //       (<ul {...provided.droppableProps} className = "chores list-group" ref = {provided.innerRef}>
-            
-    //       {chores.map(({_id, user_id, name, details,completed}, index)=>{
-    //         return(
-    //           <Draggable key = {_id} draggableId={_id} index ={index}>
-    //             {(provided)=>(  
-                  
-                  
-    //                <li className = "list-group-item" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} >
-    //                  <h5>{name}</h5>
-    //                </li>
-    //               )}
-    //           </Draggable>
-    //         )
-    //       })}
-    //       {provided.placeholder}
-    //     </ul>
-    //     )}
-    //   </Droppable>
-    // </DragDropContext>
+
   )
 }

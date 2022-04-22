@@ -25,7 +25,8 @@ function ChoresColumn({column}) {
               {...provided.draggableProps}
               {...provided.dragHandleProps} 
               >
-                <h5 className = "text-light">{name}</h5>
+                <h5 className = "text-light" style={{display:"inline"}}>{name}</h5>
+                <input  style={{display:"inline", marginLeft: "1rem"}} type= "checkbox"/>
               </div>)}
             </Draggable>
           )
