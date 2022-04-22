@@ -43,12 +43,22 @@ export async function getChores(req,res){
 
 export async function updateChore(req,res){
   const {chore, new_user_id} = req.body;
-  console.log(new_user_id)
   try{
     const newChore = await Chore.findByIdAndUpdate(chore._id,{user_id: new_user_id}, {new:true})
-    console.log("new Chore: ", chore);
     return res.send({success:true})
   } catch (err) {
     console.log(err);
+  }
+}
+
+export async function checkChore(req,res){
+  const {chore_id} = req.body;
+  try{
+    const chore = await Chore.findById(chore_id);
+    const newChore = await Chore.findByIdAndUpdate(chore_id,{completed:!chore.completed}, {new:true})
+    console.log(newChore);
+    return res.send({success: true})
+  } catch (err) {
+    console.log(err)
   }
 }
