@@ -1,11 +1,9 @@
 import axios from 'axios'
-import React,{useState} from 'react'
+import {useState} from 'react'
 import {Droppable, Draggable} from "react-beautiful-dnd"
-
+import {CloseOutlined} from '@ant-design/icons'
+import Chore from './Chore.js'
 function ChoresColumn({column}) {
-const updateCheck = async() => {
-  const response = await axios.put("/check-chore",{chore_id: choreId});
-}
 
 const [choreId, setChoreId] = useState();
 // const [check, setCheck] = useState();
@@ -30,13 +28,12 @@ const [choreId, setChoreId] = useState();
             
             <Draggable key = {_id} draggableId = {name} index = {index}>
               {provided => (
-              <div className = "d-flex justify-content-between"
-              ref ={provided.innerRef}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps} 
+              <div className = ""
+                ref ={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps} 
               >
-                <h5 className = "text-light" style={{display:"inline"}}>{name}</h5>
-                <input style={{ marginLeft: "1rem"}} checked={completed} onChange={updateCheck} type= "checkbox"/>
+                <Chore name={name} completed = {completed} _id = {_id}/>                
               </div>)}
             </Draggable>
           )
