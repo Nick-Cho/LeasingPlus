@@ -62,3 +62,15 @@ export async function checkChore(req,res){
     console.log(err)
   }
 }
+
+export async function deleteChore(req,res){
+  const {chore_id} = req.params;
+  // console.log(chore_id);
+  try{
+    const chore = await Chore.findByIdAndDelete(mongoose.Types.ObjectId(chore_id));
+    // console.log(chore);
+    res.status(200).send({success:true})
+  } catch(err) {  
+    console.log(err);
+  }
+}

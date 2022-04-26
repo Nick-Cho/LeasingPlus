@@ -3,7 +3,7 @@ import {useState} from 'react'
 import {Droppable, Draggable} from "react-beautiful-dnd"
 import {CloseOutlined} from '@ant-design/icons'
 import Chore from './Chore.js'
-function ChoresColumn({column}) {
+function ChoresColumn({column,deleteChore}) {
 
 const [choreId, setChoreId] = useState();
 // const [check, setCheck] = useState();
@@ -21,8 +21,8 @@ const [choreId, setChoreId] = useState();
         {...provided.droppableProps}
         ref = {provided.innerRef}
       >
-        <h2 className = "text-light font" >{column.name}</h2>
-        {column.chores.map(({_id,name, details, completed}, index)=>{
+        <h2 className = "text-light font" >{column.name}</h2> 
+        {column.chores.map(({_id, name, completed}, index)=>{
           setChoreId(_id);
           return (
             

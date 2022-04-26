@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd"
 import ChoresColumn from './ChoresColumn'
 import axios from "axios"
-export default function Chores({choresObject}) {
+export default function Chores({choresObject, deleteChore}) {
 const [columns, setColumns] = useState([]);
 
 useEffect(()=>{

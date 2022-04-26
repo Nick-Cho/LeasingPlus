@@ -73,7 +73,12 @@ export default function Dashboard() {
     }    
   }
 
-  
+  const deleteChore = async() => {
+    const response = await axios.delete("/delete-chore", {chore_id: _id});
+    console.log(response)
+    getChores();
+  }
+
 
   useEffect(()=>{
     // console.log(state)
@@ -117,7 +122,7 @@ export default function Dashboard() {
               {chores && <Chores choresObject = {chores}/>}
               {
                 showAddChore ?
-                <ChoreForm handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />
+                <ChoreForm deleteChore={deleteChore} handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />
                 :            
                 <h4 className = "text-light text-center" onClick={()=>{setShowAddChore(!showAddChore)}} style= {{cursor: "pointer"}}>+ Add Chore</h4>                
               }
