@@ -55,3 +55,6 @@ export async function getUser(req,res){
   }
 }
 
+export async function payRent(req,res){
+  
+}

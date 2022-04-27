@@ -73,12 +73,6 @@ export default function Dashboard() {
     }    
   }
 
-  const deleteChore = async() => {
-    const response = await axios.delete("/delete-chore", {chore_id: _id});
-    console.log(response)
-    getChores();
-  }
-
 
   useEffect(()=>{
     // console.log(state)
