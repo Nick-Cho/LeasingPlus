@@ -103,26 +103,30 @@ export default function Dashboard() {
   return (
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className ="container-fluid">
       <div className = "row">
-        <DashboardSidebar wallpaper={wallpaper} tenants={tenants} roommates={roommates} rentStatus={rentStatus}/>
-        {state && state.user && state.user.landlord &&
-          <div className = 'col-md-7 offset-md-1 '>
+        <div className = "col-md-4">
+          <DashboardSidebar wallpaper={wallpaper} tenants={tenants} roommates={roommates} rentStatus={rentStatus}/>
+        </div>
+        
+        <div className = "col-md-7 offset-md-1">
+          {state && state.user && state.user.landlord &&
             <SearchTenants/>  
-          </div>
-        } 
-        {state && state.user && !state.user.landlord && 
-          <div className = 'offset-md-1 mt-4 col-md-7 ' style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "15px"}}>
-            <h4 className="mt-2 text-light text-center display-4 font">Chores</h4>
-            <div>
-              {chores && <Chores choresObject = {chores}/>}
-              {
-                showAddChore ?
-                <ChoreForm deleteChore={deleteChore} handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />
-                :            
-                <h4 className = "text-light text-center" onClick={()=>{setShowAddChore(!showAddChore)}} style= {{cursor: "pointer"}}>+ Add Chore</h4>                
-              }
+          } 
+
+          {state && state.user && !state.user.landlord && 
+            <div className = 'mt-4 pb-3' style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "15px", overFlow: "hidden"}}>
+              <h4 className="mt-2 text-light text-center display-4 font">Chores</h4>
+              <div>
+                {chores && <Chores choresObject = {chores}/>}
+                {
+                  showAddChore ?
+                  <ChoreForm deleteChore={deleteChore} handleAddChore = {handleAddChore} chore={chore} setChore={setChore} />
+                  :            
+                  <h4 className = "text-light text-center" onClick={()=>{setShowAddChore(!showAddChore)}} style= {{cursor: "pointer"}}>+ Add Chore</h4>                
+                }
+              </div>
             </div>
-          </div>
-        }     
+          }     
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import Account from "../models/user";
 import cloudinary from "cloudinary";
+const stripe = require('stripe')('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');
 const mongoose = require("mongoose")
 
 cloudinary.config({
@@ -7,6 +8,7 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 })
+
 export async function searchUser(req,res){
   const {query} = req.params;
     // Checking if query is given
@@ -56,5 +58,17 @@ export async function getUser(req,res){
 }
 
 export async function payRent(req,res){
-  
+  try{
+    const customer = await stripe.customers.create({
+      // email: ,
+      // source:,
+    })
+    const charge = await stripe.charges.create({
+      // amount: ,
+      currency: "cad",
+
+    })
+  } catch (err){
+    console.log(err);
+  }
 }
