@@ -58,10 +58,11 @@ export async function getUser(req,res){
 }
 
 export async function payRent(req,res){
+  const {user} = req.body;
   try{
     const customer = await stripe.customers.create({
-      // email: ,
-      // source:,
+      email: user.email,
+      source: user._id,
     })
     const charge = await stripe.charges.create({
       // amount: ,

@@ -2,9 +2,16 @@ import React, {useContext} from 'react'
 import {UserContext} from '../context/index'
 import Image from "next/image"
 import { useRouter } from "next/router";
+import axios from 'axios';
 function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
   const [state,setState] = useContext(UserContext);
   const router = useRouter();
+  const handlePay = async (e) => {
+    const response = await axios.put(`/stripe-pay`, {
+      user: state.user,
+    })
+  }
+
   return (
     <div className = "mt-4 pb-2 h-25" style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "10px"}}>
         <Image src = {wallpaper} width={75} height={65} className = "px-3 pt-4" alt = "" />
@@ -77,8 +84,8 @@ function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
                 marginLeft: "25%", 
                 width: "50%",
               }}
-              
-              >
+              onClick = {router.push("/rent-confirmation")}
+            >
                 Pay Rent
             </button>
           </>)   
