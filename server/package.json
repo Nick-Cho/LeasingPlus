@@ -22,6 +22,9 @@
     "mongoose": "^6.2.6",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
-    "stripe": "^8.219.0"
+    "stripe": "^8.222.0"
+  },
+  "devDependencies": {
+    "@types/stripe": "^8.0.417"
   }
 }

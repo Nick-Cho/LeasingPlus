@@ -1,6 +1,6 @@
 import Account from "../models/user";
 import cloudinary from "cloudinary";
-const stripe = require('stripe')('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');
+const stripe = require('stripe')('sk_test_51KstQhBKEerwsYTQkaycKBjNOWfjOet6p9hUvFqfQ6QFp7t24Yj4xTsB4Rr4XXRntFRLh6SSxiymP6drNuWcaqq8003WXwUjEY');
 const mongoose = require("mongoose")
 
 cloudinary.config({
@@ -57,19 +57,22 @@ export async function getUser(req,res){
   }
 }
 
-export async function payRent(req,res){
+export async function stripeAccountOnboarding(req,res){
   const {user} = req.body;
+  let status;
   try{
-    const customer = await stripe.customers.create({
-      email: user.email,
-      source: user._id,
-    })
-    const charge = await stripe.charges.create({
-      // amount: ,
-      currency: "cad",
+    const account = await stripe.accounts.create({type: 'express'});
+    const accountLink = await stripe.accountLinks.create({
+      account: account.id,
+      refresh_url: 'https://localhost:3000/user/payments/stripe-return',
+      return_url: 'https://localhost:3000/user/payments/stripe-return',
+      type: 'account_onboarding',
+    });
+    res.send({stripe_id: account.id})
+    status = "success";
 
-    })
   } catch (err){
     console.log(err);
+    status = "error";
   }
 }

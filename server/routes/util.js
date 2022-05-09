@@ -5,12 +5,12 @@ import {
   searchUser, 
   uploadImage, 
   getUser,
-  payRent
+  stripeAccountOnboarding
 } from '../controllers/util'
 
 router.get('/search-user/:query', searchUser);
 router.post('/upload-image', formidable({maxFileSize: 5 *1024* 1024}), uploadImage);
 router.get('/get-user/:id', getUser);
-router.put('/stripe-pay/:id', payRent)
+router.post('/stripe-account-onboard', stripeAccountOnboarding)
 
 module.exports = router;

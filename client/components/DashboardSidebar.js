@@ -6,12 +6,9 @@ import axios from 'axios';
 function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
   const [state,setState] = useContext(UserContext);
   const router = useRouter();
-  const handlePay = async (e) => {
-    const response = await axios.put(`/stripe-pay`, {
-      user: state.user,
-    })
+  const handleClick = async(e) => {
+    router.push("/rent-confirmation");
   }
-
   return (
     <div className = "mt-4 pb-2 h-25" style = {{backgroundColor: "rgb(25,25,28)", borderRadius: "10px"}}>
         <Image src = {wallpaper} width={75} height={65} className = "px-3 pt-4" alt = "" />
@@ -71,7 +68,6 @@ function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
               {roommates && roommates.map((roommate)=>{
                 return(
                   <div className = "px-3 py-2" style = {{borderTop: "1px solid rgba(70, 70, 70, 1)", backgroundColor: "rgb(25,25,28)"}}>
-
                     <h4 className = "font text-light" style= {{display: "inline"}}>Name: {roommate.name}</h4>
                     <h5 className= "font text-light">Email: {roommate.email}</h5>
                   </div>
@@ -84,7 +80,7 @@ function DashboardSidebar({wallpaper, tenants, roommates, rentStatus}) {
                 marginLeft: "25%", 
                 width: "50%",
               }}
-              onClick = {router.push("/rent-confirmation")}
+              onClick = {handleClick}
             >
                 Pay Rent
             </button>
