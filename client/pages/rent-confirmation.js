@@ -1,13 +1,17 @@
 import React,{useContext} from 'react'
 import {UserContext} from '../context/index.js';
 import axios from "axios";
+import {useRouter} from "next/router"
 function RentConfirmation() {
   const [state,setState] = useContext(UserContext);
+  const router = useRouter();
   const handleSubmit = async(e)=> {
     e.preventDefault();
     const response = await axios.post('/stripe-account-onboard');
+    console.log(response);
     setState({user: state.user, token: state.token, stripe_id: response.data.stripe_id});
     console.log(state);
+    // router.push(response.data.redirect)
   }
   return (
     <div style = {{backgroundColor: "black", minHeight: "100vh", paddingTop: "4rem"}} className = "container-fluid"> 

@@ -3,6 +3,9 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 
 const accountSchema = new Schema({
+  stripe_id: {
+    type:String,
+  },
   name:{
     type: String,
     trim: true,

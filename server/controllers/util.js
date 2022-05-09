@@ -1,5 +1,6 @@
 import Account from "../models/user";
 import cloudinary from "cloudinary";
+import account from "../models/user";
 const stripe = require('stripe')('sk_test_51KstQhBKEerwsYTQkaycKBjNOWfjOet6p9hUvFqfQ6QFp7t24Yj4xTsB4Rr4XXRntFRLh6SSxiymP6drNuWcaqq8003WXwUjEY');
 const mongoose = require("mongoose")
 
@@ -64,11 +65,13 @@ export async function stripeAccountOnboarding(req,res){
     const account = await stripe.accounts.create({type: 'express'});
     const accountLink = await stripe.accountLinks.create({
       account: account.id,
-      refresh_url: 'https://localhost:3000/user/payments/stripe-return',
+      refresh_url: 'https://localhost:3000/user/payments/stripe-refresh',
       return_url: 'https://localhost:3000/user/payments/stripe-return',
       type: 'account_onboarding',
     });
-    res.send({stripe_id: account.id})
+    console.log(accountLink);
+    Account.findByIdAndUpdate(user._id, {stripe_id: account.id});
+    res.send({stripe_id: account.id, redirect: accountLink.url})
     status = "success";
 
   } catch (err){
@@ -76,3 +79,13 @@ export async function stripeAccountOnboarding(req,res){
     status = "error";
   }
 }
+
+// export async function getStripeAcc(req,res){
+//   try{
+//     const {id} = req.params;
+//     const account = await stripe.accounts.get({id});
+//     console.log(account);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
