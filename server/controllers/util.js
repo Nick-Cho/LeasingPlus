@@ -1,6 +1,5 @@
 import Account from "../models/user";
 import cloudinary from "cloudinary";
-import account from "../models/user";
 const stripe = require('stripe')('sk_test_51KstQhBKEerwsYTQkaycKBjNOWfjOet6p9hUvFqfQ6QFp7t24Yj4xTsB4Rr4XXRntFRLh6SSxiymP6drNuWcaqq8003WXwUjEY');
 const mongoose = require("mongoose")
 
@@ -60,6 +59,7 @@ export async function getUser(req,res){
 
 export async function stripeAccountOnboarding(req,res){
   const {user} = req.body;
+  console.log(user)
   let status;
   try{
     const account = await stripe.accounts.create({type: 'express'});
@@ -70,7 +70,7 @@ export async function stripeAccountOnboarding(req,res){
       type: 'account_onboarding',
     });
     console.log(accountLink);
-    Account.findByIdAndUpdate(user._id, {stripe_id: account.id});
+    await Account.findByIdAndUpdate(user._id, {stripe_id: account.id});
     res.send({stripe_id: account.id, redirect: accountLink.url})
     status = "success";
 
@@ -80,12 +80,12 @@ export async function stripeAccountOnboarding(req,res){
   }
 }
 
-// export async function getStripeAcc(req,res){
-//   try{
-//     const {id} = req.params;
-//     const account = await stripe.accounts.get({id});
-//     console.log(account);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
+export async function getStripeAcc(req,res){
+  try{
+    const {id} = req.params;
+    const account = await stripe.accounts.get({id});
+    console.log(account);
+  } catch (err) {
+    console.log(err);
+  }
+}

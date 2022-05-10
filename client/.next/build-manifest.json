@@ -39,11 +39,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/user/dashboard.js"
-    ],
-    "/user/payments/stripe-return": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/user/payments/stripe-return.js"
     ]
   },
   "ampFirstPages": []
