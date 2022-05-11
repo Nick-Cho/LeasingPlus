@@ -7,12 +7,9 @@ function RentConfirmation() {
   const router = useRouter();
   const handleSubmit = async(e)=> {
     e.preventDefault();
-    const response = await axios.post('/stripe-account-onboard',{
-      user: state.user
-    });
+    const response = await axios.post('/stripe-account-onboard');
     console.log(response);
-    const newUser = await axios.get(`/get-user/${state.user._id}`)
-    setState({user: newUser, token: state.token});
+    setState({user: state.user, token: state.token, stripe_id: response.data.stripe_id});
     console.log(state);
     // router.push(response.data.redirect)
   }
